@@ -1,13 +1,18 @@
 package edu.gatech.team10.weshelter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private EditText emailField;
+    private EditText passwordField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,16 +21,22 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
+    public void cancelLogin(View v){
+        finish();
+    }
 
+    public void verifyLogin(View v) {
+        emailField = (EditText) findViewById(R.id.editText_login_email);
+        passwordField = (EditText) findViewById(R.id.editText_login_password);
+
+        if (emailField.getText().toString().equals("user")
+                && passwordField.getText().toString().equals("password")) {
+            startActivity(new Intent(LoginActivity.this, ShelterListActivity.class));
+        } else {
+            Snackbar.make(v, "Invalid Email or Password.", Snackbar.LENGTH_LONG).show();
+        }
+    }
 
 }
