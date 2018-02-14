@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailField;
+    private EditText usernameField;
     private EditText passwordField;
 
     @Override
@@ -28,14 +28,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void verifyLogin(View v) {
-        emailField = (EditText) findViewById(R.id.editText_login_email);
+        usernameField = (EditText) findViewById(R.id.editText_login_username);
         passwordField = (EditText) findViewById(R.id.editText_login_password);
 
-        if (emailField.getText().toString().equals("user")
+        if (usernameField.getText().toString().equals("user")
                 && passwordField.getText().toString().equals("password")) {
             startActivity(new Intent(LoginActivity.this, ShelterListActivity.class));
         } else {
-            Snackbar.make(v, "Invalid Email or Password.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(v, "Invalid Username or Password.", Snackbar.LENGTH_LONG).show();
         }
     }
 
