@@ -24,14 +24,16 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true">
-        </activity>
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ShelterListActivity"
             android:label="@string/title_activity_shelter_list"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".RegistrationActivity"
+            android:label="@string/title_activity_registration"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
