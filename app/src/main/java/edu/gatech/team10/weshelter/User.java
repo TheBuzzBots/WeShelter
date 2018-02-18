@@ -5,18 +5,20 @@ package edu.gatech.team10.weshelter;
  */
 
 public abstract class User {
-    private String name;
+    private String fName;
+    private String lName;
     private String email;
     private String password;
 
     User(){
-        this("user", "password", "name");
+        this("user", "password", "fName", "lName");
     }
 
-    User(String email, String password, String name){
+    User(String email, String password, String fName, String lName){
         this.email = email;
         this.password = password;
-        this.name = name;
+        this.fName = fName;
+        this.lName = lName;
     }
     public String getPassword(){
         return password;
@@ -26,9 +28,11 @@ public abstract class User {
         return email;
     }
 
-    public String getName() {
-        return name;
+    public String getFName() {
+        return fName;
     }
+
+    public String getlName() { return lName; }
 
     public void setPassword(String password){
         this.password = password;
@@ -38,7 +42,9 @@ public abstract class User {
         this.email = email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFName(String fName) {
+        this.fName = fName;
     }
+
+    public void setlName(String lName) { this.lName = lName; }
 }
