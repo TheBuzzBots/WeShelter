@@ -6,8 +6,8 @@ package edu.gatech.team10.weshelter;
 
 public class Admin extends User {
 
-    Admin(String email, String password, String name) {
-        super(email, password, name);
+    Admin(String email, String password, String name, String fName, String lName) {
+        super(email, password, fName, lName);
     }
 
 }
