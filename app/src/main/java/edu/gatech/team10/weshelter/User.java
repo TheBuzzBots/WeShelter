@@ -4,7 +4,7 @@ package edu.gatech.team10.weshelter;
  * Created by Ben on 2/11/2018.
  */
 
-public class User {
+public abstract class User {
     private String name;
     private String email;
     private String password;
@@ -12,6 +12,7 @@ public class User {
     User(){
         this("user", "password", "name");
     }
+
     User(String email, String password, String name){
         this.email = email;
         this.password = password;
@@ -20,6 +21,7 @@ public class User {
     public String getPassword(){
         return password;
     }
+
     public String getEmail() {
         return email;
     }
