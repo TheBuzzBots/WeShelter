@@ -25,7 +25,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     public void validateRegistration(View v) {
-        //TO DO: Implement me!
+        //TO DO: Implement me! Should add new user data to database
+        //Then redirect to login so active user can be set
+        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
     }
 
 }
