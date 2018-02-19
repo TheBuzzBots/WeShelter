@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void verifyLogin(View v) {
+        //should set the activeUser in the Model
         usernameField = (EditText) findViewById(R.id.editText_login_username);
         passwordField = (EditText) findViewById(R.id.editText_login_password);
 
