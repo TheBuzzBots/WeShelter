@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.Map;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameField;
@@ -28,15 +30,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void verifyLogin(View v) {
-        //should set the activeUser in the Model
+        //gets text input from view fields
         usernameField = (EditText) findViewById(R.id.editText_login_username);
         passwordField = (EditText) findViewById(R.id.editText_login_password);
 
-        if (usernameField.getText().toString().equals("user")
-                && passwordField.getText().toString().equals("password")) {
-            startActivity(new Intent(LoginActivity.this, ShelterListActivity.class));
+        //fetches map of valid users
+        Map<String, User> users = Model.getInstance().getUsers();
+
+        //checks if username is valid user
+        if (users.containsKey(usernameField.getText().toString())) {
+            User user = users.get(usernameField.getText().toString());
+            //checks if password is correct for specified user
+            if (passwordField.getText().toString().equals(user.getPassword())) {
+                Model.getInstance().setActiveUser(user);
+                startActivity(new Intent(LoginActivity.this, ShelterListActivity.class));
+            } else {
+                Snackbar.make(v, "Invalid Password.", Snackbar.LENGTH_LONG).show();
+            }
         } else {
-            Snackbar.make(v, "Invalid Username or Password.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(v, "Invalid Username.", Snackbar.LENGTH_LONG).show();
         }
     }
 
