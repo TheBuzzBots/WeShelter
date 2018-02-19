@@ -33,6 +33,7 @@
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
