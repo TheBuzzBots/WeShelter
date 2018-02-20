@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "992067013693",
+    "firebase_url": "https://weshelter-6f245.firebaseio.com",
+    "project_id": "weshelter-6f245",
+    "storage_bucket": "weshelter-6f245.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992067013693:android:beb04e663e22b5e8",
+        "android_client_info": {
+          "package_name": "edu.gatech.team10.weshelter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992067013693-hkbasu2j5nm6s34q9fgk21f68t2halva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.team10.weshelter",
+            "certificate_hash": "d0260a6deccf2c1212206e9f0f194e4f7ee949bd"
+          }
+        },
+        {
+          "client_id": "992067013693-496bdq0drnmdc79j6pi062o5ps8cjo82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB26zSetNhHz0hKkPDE1emcV14jHKCapDA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992067013693-496bdq0drnmdc79j6pi062o5ps8cjo82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
