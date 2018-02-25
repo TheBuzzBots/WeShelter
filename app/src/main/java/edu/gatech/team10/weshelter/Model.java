@@ -1,7 +1,9 @@
 package edu.gatech.team10.weshelter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +17,11 @@ public class Model {
     private static final Model _instance = new Model();
     public static Model getInstance() { return _instance; }
 
+    /** set of shelters */
+    private List<Shelter> _shelters;
+
+    private Shelter _activeShelter;
+
     /** Set of valid users */
     private Map<String, User> _users;
 
@@ -23,7 +30,37 @@ public class Model {
 
     private Model() {
         _users = new HashMap<>();
+        _shelters = new ArrayList<>();
+        loadDummyData();
         //will probably connect to the database here
+    }
+
+    public List<Shelter> getShelters() {
+        return _shelters;
+    }
+
+    private void loadDummyData() {
+        _users.put("user", new User());
+        for (int i = 0; i < 15; i++) {
+            String name = "Shelter" + i;
+            _shelters.add(new Shelter(name));
+        }
+    }
+
+    public void setShelters(List<Shelter> shelters) {
+        this._shelters = shelters;
+    }
+
+    public void addShelter(Shelter shelter) {
+        _shelters.add(shelter);
+    }
+
+    public void setActiveShelter(Shelter activeShelter) {
+        this._activeShelter = activeShelter;
+    }
+
+    public Shelter getActiveShelter() {
+        return _activeShelter;
     }
 
     /** @param activeUser the current active user of the app */
