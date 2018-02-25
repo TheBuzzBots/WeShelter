@@ -25,15 +25,19 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ShelterListActivity"
             android:label="@string/title_activity_shelter_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
             android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShelterDetailActivity"
+            android:label="@string/title_activity_shelter_detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
