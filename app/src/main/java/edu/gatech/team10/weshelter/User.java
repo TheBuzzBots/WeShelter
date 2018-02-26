@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Ben on 2/11/2018.
  */
 
-public class User {
+public abstract class User {
     private String name;
     private String username;
     private String password;
@@ -17,12 +17,14 @@ public class User {
     User(){
         this("user", "password", "name", "User");
     }
+
     User(String username, String password, String name, String type){
         this.username = username;
         this.password = password;
         this.name = name;
         this.type = type;
     }
+
     public String getPassword(){
         return password;
     }
@@ -46,8 +48,13 @@ public class User {
         this.name = name;
     }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     @Override
     public boolean equals(Object other) {

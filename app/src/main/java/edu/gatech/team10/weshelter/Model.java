@@ -40,7 +40,7 @@ public class Model {
     }
 
     private void loadDummyData() {
-        _users.put("user", new User());
+        _users.put("user", new HomelessPerson());
         for (int i = 0; i < 15; i++) {
             String name = "Shelter" + i;
             _shelters.add(new Shelter(name));
