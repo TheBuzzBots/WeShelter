@@ -30,7 +30,8 @@ public class RegistrationActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById(R.id.editText_reg_password);
         typeSpinner = (Spinner) findViewById(R.id.spinner_reg_usertype);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, User.legalTypes);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, User.legalTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(adapter);
 
@@ -52,7 +53,12 @@ public class RegistrationActivity extends AppCompatActivity {
         } else if (Model.getInstance().getUsers().containsKey(username)) {
             Snackbar.make(v, "Username already exists.", Snackbar.LENGTH_LONG).show();
         } else {
-            User newUser = new User(username, password, name, type);
+            User newUser;
+            if (type.equals("User")) {
+                newUser = new HomelessPerson(username, password, name);
+            } else {
+                newUser = new Admin(username, password, name);
+            }
             Model.getInstance().getUsers().put(usernameField.getText().toString(), newUser);
             startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
         }
