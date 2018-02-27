@@ -1,50 +1,77 @@
 package edu.gatech.team10.weshelter;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Ben on 2/11/2018.
  */
 
 public abstract class User {
-    private String fName;
-    private String lName;
-    private String email;
+    private String name;
+    private String username;
     private String password;
+    private String type;
+    public static List<String> legalTypes = Arrays.asList("User", "Admin");
 
     User(){
-        this("user", "password", "fName", "lName");
+        this("user", "password", "name", "User");
     }
 
-    User(String email, String password, String fName, String lName){
-        this.email = email;
+    User(String username, String password, String name, String type){
+        this.username = username;
         this.password = password;
-        this.fName = fName;
-        this.lName = lName;
+        this.name = name;
+        this.type = type;
     }
+
     public String getPassword(){
         return password;
     }
-
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public String getFName() {
-        return fName;
+    public String getName() {
+        return name;
     }
-
-    public String getlName() { return lName; }
 
     public void setPassword(String password){
         this.password = password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setFName(String fName) {
-        this.fName = fName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setlName(String lName) { this.lName = lName; }
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) { return false; }
+        if (this == other) { return true; }
+        if (!(other instanceof User)) {return false; }
+        User o = (User) other;
+        if (o.username.equals(this.username)) { return true; }
+        else { return false; }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        for (int i = 0; i < this.username.length(); i++) {
+            hash = hash*31 + this.username.charAt(i);
+        }
+        return hash;
+    }
 }
