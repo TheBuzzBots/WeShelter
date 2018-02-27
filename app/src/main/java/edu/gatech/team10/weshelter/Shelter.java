@@ -9,7 +9,8 @@ public class Shelter {
     private String name;
     private int capacity;
     private int currOccupancy;
-    private String[] demographic;
+    private String restriction;
+    private String specialNote;
     private double longitude;
     private double latitude;
     private String address;
@@ -47,27 +48,20 @@ public class Shelter {
         this.currOccupancy = currOccupancy;
     }
 
-    public String[] getDemographic() {
-        return this.demographic;
+    public String getRestriction() {
+        return this.restriction;
     }
-    public String demoToString() {
-        String demo = "";
-        for (int i = 0; i < demographic.length; i++) {
-            if (i == demographic.length - 1) {
-                demo += demographic[i];
-            } else {
-                demo += demographic[i] + ", ";
-            }
-        }
-        return demo;
+
+    public void setRestriction(String restriction) {
+        this.restriction = restriction;
     }
-    public void setDemographic(String...demo) {
-        this.demographic = new String[demo.length];
-        int i = 0;
-        for (String s : demo) {
-            demographic[i] = s;
-            i++;
-        }
+
+    public String getSpecialNote() {
+        return specialNote;
+    }
+
+    public void setSpecialNote(String specialNote) {
+        this.specialNote = specialNote;
     }
 
     public double getLongitude() {

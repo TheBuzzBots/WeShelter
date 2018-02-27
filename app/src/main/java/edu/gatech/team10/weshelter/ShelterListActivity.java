@@ -19,6 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 public class ShelterListActivity extends AppCompatActivity {
@@ -44,6 +50,7 @@ public class ShelterListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.shelter_list);
