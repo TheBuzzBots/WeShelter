@@ -76,12 +76,14 @@ public class ShelterListActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mNameView;
+            public final TextView mRestrictions;
             public Shelter mShelter;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
                 mNameView = (TextView) view.findViewById(R.id.textView_content_shelter_name);
+                mRestrictions = (TextView) view.findViewById(R.id.textView_content_shelter_demo);
             }
 
             @Override
@@ -109,6 +111,7 @@ public class ShelterListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mShelter = mDataset.get(position);
             holder.mNameView.setText(mDataset.get(position).getName());
+            holder.mRestrictions.setText(mDataset.get(position).getRestrictions());
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
