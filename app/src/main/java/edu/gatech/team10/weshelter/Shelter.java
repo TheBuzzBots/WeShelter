@@ -7,13 +7,18 @@ package edu.gatech.team10.weshelter;
 public class Shelter {
     private int key;
     private String name;
-    private int capacity;
+    private String capacity;
     private int currOccupancy;
-    private String[] demographic;
+    private String restrictions;
     private double longitude;
     private double latitude;
     private String address;
+    private String specialNote;
     private String phone;
+
+    public Shelter() {
+        this(null);
+    }
 
     public Shelter(String name) {
         this.name = name;
@@ -33,10 +38,10 @@ public class Shelter {
         this.name = name;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return this.capacity;
     }
-    public void setCapacity(int capacity) {
+    public void setCapacity (String capacity) {
         this.capacity = capacity;
     }
 
@@ -47,27 +52,12 @@ public class Shelter {
         this.currOccupancy = currOccupancy;
     }
 
-    public String[] getDemographic() {
-        return this.demographic;
+    public String getRestrictions() {
+        return this.restrictions;
     }
-    public String demoToString() {
-        String demo = "";
-        for (int i = 0; i < demographic.length; i++) {
-            if (i == demographic.length - 1) {
-                demo += demographic[i];
-            } else {
-                demo += demographic[i] + ", ";
-            }
-        }
-        return demo;
-    }
-    public void setDemographic(String...demo) {
-        this.demographic = new String[demo.length];
-        int i = 0;
-        for (String s : demo) {
-            demographic[i] = s;
-            i++;
-        }
+
+    public void setRestrictions(String restrictions) {
+        this.restrictions = restrictions;
     }
 
     public double getLongitude() {
@@ -89,6 +79,14 @@ public class Shelter {
     }
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSpecialNote() {
+        return specialNote;
+    }
+
+    public void setSpecialNote(String note) {
+        this.specialNote = note;
     }
 
     public String getPhone() {
