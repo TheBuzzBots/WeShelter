@@ -7,7 +7,7 @@ package edu.gatech.team10.weshelter;
 public class Shelter {
     private int key;
     private String name;
-    private int capacity;
+    private String capacity;
     private int currOccupancy;
     private String restriction;
     private String specialNote;
@@ -34,10 +34,10 @@ public class Shelter {
         this.name = name;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return this.capacity;
     }
-    public void setCapacity(int capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 

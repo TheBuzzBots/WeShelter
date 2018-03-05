@@ -4,11 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,29 +21,9 @@ public class Model extends AppCompatActivity{
     /** Singleton instance */
     private static final Model _instance = new Model();
     public static Model getInstance() { return _instance; }
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Shelter");
 
-    @Override
 
-    protected void onCreate(Bundle SavedInstance) {
-        super.onCreate(SavedInstance);
 
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                readShelters(dataSnapshot);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Database Error", "Failed to read value.", error.toException());
-            }
-        });
-    }
 
     /** set of shelters */
     private List<Shelter> _shelters;
@@ -69,27 +44,6 @@ public class Model extends AppCompatActivity{
 
     public List<Shelter> getShelters() {
         return _shelters;
-    }
-
-    private void readShelters(DataSnapshot dataSnapshot) {
-        _users.put("user", new HomelessPerson());
-        int i = 0;
-        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-            Shelter shelter = new Shelter("");
-            shelter.setAddress(ds.child(Integer.toString(i)).getValue(Shelter.class).getAddress());
-            shelter.setCapacity(ds.child(Integer.toString(i)).getValue(Shelter.class).getCapacity());
-            shelter.setLatitude(ds.child(Integer.toString(i)).getValue(Shelter.class).getLatitude());
-            shelter.setLongitude(ds.child(Integer.toString(i)).getValue(Shelter.class).getLongitude());
-            shelter.setPhone(ds.child(Integer.toString(i)).getValue(Shelter.class).getPhone());
-            shelter.setRestriction(ds.child(Integer.toString(i)).getValue(Shelter.class).getRestriction());
-            shelter.setName(ds.child(Integer.toString(i)).getValue(Shelter.class).getName());
-            shelter.setSpecialNote(ds.child(Integer.toString(i)).getValue(Shelter.class).getSpecialNote());
-            shelter.setKey(ds.child(Integer.toString(i)).getValue(Shelter.class).getKey());
-
-            _shelters.add(shelter);
-            i++;
-        }
     }
 
     public void setShelters(List<Shelter> shelters) {
