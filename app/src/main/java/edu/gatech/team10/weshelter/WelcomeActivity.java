@@ -12,9 +12,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+=======
+import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Shelter");
     final private Model model = Model.getInstance();
 
@@ -48,9 +49,12 @@ public class WelcomeActivity extends AppCompatActivity {
                 Log.w("Database Error", "Failed to read value.", error.toException());
             }
 
+
+
         });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        loadShelters();
     }
 
     public void loginFromWelcome(View v){
@@ -59,5 +63,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void registerFromWelcome(View v) {
         startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
+    }
+
+    private void loadShelters() {
+        InputStream is = getResources().openRawResource(R.raw.shelterdata);
+        Model.getInstance().readShelters(is);
     }
 }

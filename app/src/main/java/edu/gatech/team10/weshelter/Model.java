@@ -3,8 +3,11 @@ package edu.gatech.team10.weshelter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,11 +42,42 @@ public class Model extends AppCompatActivity{
     private Model() {
         _users = new HashMap<>();
         _shelters = new ArrayList<>();
-        //will probably connect to the database here
     }
 
     public List<Shelter> getShelters() {
         return _shelters;
+    }
+
+    public void readShelters(InputStream is) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        String line;
+        try {
+            br.readLine(); //get rid of header line
+            while ((line = br.readLine()) != null) {
+
+                String[] data = line.split("\\|");
+                Shelter shelter = new Shelter();
+
+                int key = Integer.parseInt(data[0]);
+                double longitude = Double.parseDouble(data[4]);
+                double latitude = Double.parseDouble(data[5]);
+
+                shelter.setKey(key);
+                shelter.setName(data[1]);
+                shelter.setCapacity(data[2]);
+                shelter.setRestriction(data[3]);
+                shelter.setLongitude(longitude);
+                shelter.setLatitude(latitude);
+                shelter.setAddress(data[6]);
+                shelter.setSpecialNote(data[7]);
+                shelter.setPhone(data[8]);
+
+                addShelter(shelter);
+            }
+            br.close();
+        } catch (IOException e) {
+            Log.e("IO", "error reading assets", e);
+        }
     }
 
     public void setShelters(List<Shelter> shelters) {
