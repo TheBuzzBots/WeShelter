@@ -9,12 +9,19 @@ public class Shelter {
     private String name;
     private String capacity;
     private int currOccupancy;
+
     private String restriction;
     private String specialNote;
     private String longitude;
     private String latitude;
+
     private String address;
+    private String specialNote;
     private String phone;
+
+    public Shelter() {
+        this(null);
+    }
 
     public Shelter(String name) {
         this.name = name;
@@ -37,6 +44,7 @@ public class Shelter {
     public String getCapacity() {
         return this.capacity;
     }
+
     public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
@@ -75,6 +83,14 @@ public class Shelter {
     }
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSpecialNote() {
+        return specialNote;
+    }
+
+    public void setSpecialNote(String note) {
+        this.specialNote = note;
     }
 
     public String getPhone() {

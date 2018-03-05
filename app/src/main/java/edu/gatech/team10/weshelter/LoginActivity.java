@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.InputStream;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -51,5 +52,6 @@ public class LoginActivity extends AppCompatActivity {
             Snackbar.make(v, "Invalid Username.", Snackbar.LENGTH_LONG).show();
         }
     }
+
 
 }

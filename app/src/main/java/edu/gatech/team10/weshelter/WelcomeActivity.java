@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Shelter");
@@ -54,6 +55,7 @@ public class WelcomeActivity extends AppCompatActivity {
         });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        loadShelters();
     }
 
     public void loginFromWelcome(View v){
@@ -62,5 +64,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void registerFromWelcome(View v) {
         startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
+    }
+
+    private void loadShelters() {
+        InputStream is = getResources().openRawResource(R.raw.shelterdata);
+        Model.getInstance().readShelters(is);
     }
 }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "992067013693-ghb9618g2hk0e2i7mdqkmr1d2l2i507h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.team10.weshelter",
+            "certificate_hash": "46354576c6a8bc98b766a4b38e79a251d9005cfd"
+          }
+        },
+        {
           "client_id": "992067013693-hkbasu2j5nm6s34q9fgk21f68t2halva.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
