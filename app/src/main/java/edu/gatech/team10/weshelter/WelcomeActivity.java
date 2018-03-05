@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+=======
 import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -23,35 +24,33 @@ public class WelcomeActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int i = 0;
-                for (DataSnapshot shelterSnapshot : dataSnapshot.getChildren()) {
+                for(DataSnapshot shelterSnapshot : dataSnapshot.getChildren()) {
 
-                    String name = Integer.toString(i);
-
-                    Shelter shelter = new Shelter("");
+                    Shelter shelter = new Shelter();
                     shelter.setAddress(shelterSnapshot.child("Address").getValue(String.class));
-                   // System.out.println("Address: " + shelter.getAddress());
-                    Log.d("Firebase Read", "Added Address");
-                    shelter.setCapacity(shelterSnapshot.child("Capacity").getValue(String.class));
-                    //System.out.println("Capacity: " + shelter.getCapacity());
-                    shelter.setLongitude(shelterSnapshot.child("Longitude").getValue(String.class));
-                    //System.out.println("Longitude " + shelter.getLongitude());
-                    shelter.setLatitude(shelterSnapshot.child("Latitude ").getValue(String.class));
-                    //System.out.println("Latitude: "+ shelterSnapshot.child("Latitude ").getValue(String.class));
+                    shelter.setLongitude(Double.parseDouble((String)shelterSnapshot.child("Longitude ").getValue()));
+                    shelter.setLatitude(Double.parseDouble((String)shelterSnapshot.child("Latitude ").getValue()));
                     shelter.setPhone(shelterSnapshot.child("Phone Number").getValue(String.class));
+                    shelter.setName(shelterSnapshot.child("Shelter Name").getValue(String.class));
                     shelter.setRestriction(shelterSnapshot.child("Restricitons").getValue(String.class));
                     shelter.setSpecialNote(shelterSnapshot.child("Special Notes").getValue(String.class));
-                    shelter.setKey(shelterSnapshot.child("Unique Key").getValue(String.class));
+                    shelter.setKey(Integer.parseInt((String)shelterSnapshot.child("Unique Key").getValue()));
+
                     model.addShelter(shelter);
-                    i++;
                 }
+
+
+
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.v("Database Error", "Failed to read value.", error.toException());
+                Log.w("Database Error", "Failed to read value.", error.toException());
             }
+
+
+
         });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);

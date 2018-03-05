@@ -1,7 +1,8 @@
 package edu.gatech.team10.weshelter;
 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,11 +19,14 @@ import java.util.Set;
  * Created by Adrianna Brown on 2/18/2018.
  */
 
-public class Model {
+public class Model extends AppCompatActivity{
 
     /** Singleton instance */
     private static final Model _instance = new Model();
     public static Model getInstance() { return _instance; }
+
+
+
 
     /** set of shelters */
     private List<Shelter> _shelters;
@@ -61,7 +65,7 @@ public class Model {
                 shelter.setKey(key);
                 shelter.setName(data[1]);
                 shelter.setCapacity(data[2]);
-                shelter.setRestrictions(data[3]);
+                shelter.setRestriction(data[3]);
                 shelter.setLongitude(longitude);
                 shelter.setLatitude(latitude);
                 shelter.setAddress(data[6]);

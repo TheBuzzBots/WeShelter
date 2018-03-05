@@ -22,6 +22,12 @@ import android.widget.Filterable;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +39,7 @@ public class ShelterListActivity extends AppCompatActivity {
     private SearchView searchView;
     final private Model model = Model.getInstance();
 
+    final private Model model = Model.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,7 @@ public class ShelterListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.shelter_list);

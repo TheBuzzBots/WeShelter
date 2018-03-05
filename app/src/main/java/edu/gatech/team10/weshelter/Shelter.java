@@ -9,12 +9,10 @@ public class Shelter {
     private String name;
     private String capacity;
     private int currOccupancy;
-
     private String restriction;
     private String specialNote;
-    private String longitude;
-    private String latitude;
-
+    private double longitude;
+    private double latitude;
     private String address;
     private String specialNote;
     private String phone;
@@ -44,7 +42,6 @@ public class Shelter {
     public String getCapacity() {
         return this.capacity;
     }
-
     public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
@@ -55,14 +52,22 @@ public class Shelter {
     public void setCurrOccupancy(int currOccupancy) {
         this.currOccupancy = currOccupancy;
     }
+    public String getRestriction() {
+        return this.restriction;
+    }
 
-    public String getRestriction() { return this.restriction; }
+    public void setRestriction(String restriction) {
+        this.restriction = restriction;
+    }
 
-    public void setRestriction(String restriction) { this.restriction = restriction; }
+    public String getSpecialNote() {
+        return specialNote;
+    }
 
-    public String getSpecialNote() { return specialNote; }
+    public void setSpecialNote(String specialNote) {
+        this.specialNote = specialNote;
+    }
 
-    public void setSpecialNote(String specialNote) { this.specialNote = specialNote; }
 
     public String getLongitude() {
         return this.longitude;
