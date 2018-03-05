@@ -5,13 +5,14 @@ package edu.gatech.team10.weshelter;
  */
 
 public class Shelter {
-    private int key;
+    private String key;
     private String name;
-    private int capacity;
+    private String capacity;
     private int currOccupancy;
-    private String[] demographic;
-    private double longitude;
-    private double latitude;
+    private String restriction;
+    private String specialNote;
+    private String longitude;
+    private String latitude;
     private String address;
     private String phone;
 
@@ -19,10 +20,10 @@ public class Shelter {
         this.name = name;
     }
 
-    public int getKey() {
+    public String getKey() {
         return this.key;
     }
-    public void setKey(int key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
@@ -33,10 +34,10 @@ public class Shelter {
         this.name = name;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return this.capacity;
     }
-    public void setCapacity(int capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 
@@ -47,40 +48,25 @@ public class Shelter {
         this.currOccupancy = currOccupancy;
     }
 
-    public String[] getDemographic() {
-        return this.demographic;
-    }
-    public String demoToString() {
-        String demo = "";
-        for (int i = 0; i < demographic.length; i++) {
-            if (i == demographic.length - 1) {
-                demo += demographic[i];
-            } else {
-                demo += demographic[i] + ", ";
-            }
-        }
-        return demo;
-    }
-    public void setDemographic(String...demo) {
-        this.demographic = new String[demo.length];
-        int i = 0;
-        for (String s : demo) {
-            demographic[i] = s;
-            i++;
-        }
-    }
+    public String getRestriction() { return this.restriction; }
 
-    public double getLongitude() {
+    public void setRestriction(String restriction) { this.restriction = restriction; }
+
+    public String getSpecialNote() { return specialNote; }
+
+    public void setSpecialNote(String specialNote) { this.specialNote = specialNote; }
+
+    public String getLongitude() {
         return this.longitude;
     }
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return this.latitude;
     }
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
