@@ -5,12 +5,11 @@ package edu.gatech.team10.weshelter;
  */
 
 public class Shelter {
-    private String key;
+    private int key;
     private String name;
     private String capacity;
     private int currOccupancy;
     private String restriction;
-    private String specialNote;
     private double longitude;
     private double latitude;
     private String address;
@@ -25,10 +24,10 @@ public class Shelter {
         this.name = name;
     }
 
-    public String getKey() {
+    public int getKey() {
         return this.key;
     }
-    public void setKey(String key) {
+    public void setKey(int key) {
         this.key = key;
     }
 
@@ -69,17 +68,17 @@ public class Shelter {
     }
 
 
-    public String getLongitude() {
+    public double getLongitude() {
         return this.longitude;
     }
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return this.latitude;
     }
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -90,13 +89,6 @@ public class Shelter {
         this.address = address;
     }
 
-    public String getSpecialNote() {
-        return specialNote;
-    }
-
-    public void setSpecialNote(String note) {
-        this.specialNote = note;
-    }
 
     public String getPhone() {
         return this.phone;

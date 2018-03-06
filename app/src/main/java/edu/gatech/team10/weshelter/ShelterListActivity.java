@@ -38,8 +38,6 @@ public class ShelterListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private SearchView searchView;
     final private Model model = Model.getInstance();
-
-    final private Model model = Model.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,7 +154,7 @@ public class ShelterListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mShelter = mDatasetFiltered.get(position);
             holder.mNameView.setText(mDatasetFiltered.get(position).getName());
-            holder.mRestrictions.setText(mDatasetFiltered.get(position).getRestrictions());
+            holder.mRestrictions.setText(mDatasetFiltered.get(position).getRestriction());
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -189,13 +187,13 @@ public class ShelterListActivity extends AppCompatActivity {
                         charString = convertSearch(charString);
                         for (Shelter s : mDataset) {
                             if (charString.toLowerCase().equals("men")
-                                    && s.getRestrictions().toLowerCase().contains("men")) {
-                                if (!s.getRestrictions().toLowerCase().contains("omen")) {
+                                    && s.getRestriction().toLowerCase().contains("men")) {
+                                if (!s.getRestriction().toLowerCase().contains("omen")) {
                                     filteredList.add(s);
                                 }
                             } else {
                                 if (s.getName().toLowerCase().contains(charString.toLowerCase())
-                                        || s.getRestrictions().toLowerCase().contains(charString.toLowerCase())) {
+                                        || s.getRestriction().toLowerCase().contains(charString.toLowerCase())) {
                                     filteredList.add(s);
                                 }
                             }
