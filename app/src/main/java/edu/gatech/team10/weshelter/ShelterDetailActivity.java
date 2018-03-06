@@ -36,7 +36,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
         TextView shelterName = (TextView) findViewById(R.id.textView_shelter_detail_name);
         shelterName.setText(model.getActiveShelter().getName());
         TextView restrictions = (TextView) findViewById(R.id.textView_shelter_detail_restrictions);
-        restrictions.setText(model.getActiveShelter().getRestrictions());
+        restrictions.setText(model.getActiveShelter().getRestriction());
         TextView capacity = (TextView) findViewById(R.id.textView_shelter_detail_capacity);
         capacity.setText(model.getActiveShelter().getCapacity());
         TextView address = (TextView) findViewById(R.id.textView_shelter_detail_address);

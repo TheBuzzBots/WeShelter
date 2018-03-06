@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-=======
+
 import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -28,6 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
                     Shelter shelter = new Shelter();
                     shelter.setAddress(shelterSnapshot.child("Address").getValue(String.class));
+                    shelter.setCapacity(shelterSnapshot.child("Capacity").getValue(String.class));
                     shelter.setLongitude(Double.parseDouble((String)shelterSnapshot.child("Longitude ").getValue()));
                     shelter.setLatitude(Double.parseDouble((String)shelterSnapshot.child("Latitude ").getValue()));
                     shelter.setPhone(shelterSnapshot.child("Phone Number").getValue(String.class));
@@ -54,7 +55,7 @@ public class WelcomeActivity extends AppCompatActivity {
         });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        loadShelters();
+        //loadShelters();
     }
 
     public void loginFromWelcome(View v){
@@ -67,6 +68,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void loadShelters() {
         InputStream is = getResources().openRawResource(R.raw.shelterdata);
-        Model.getInstance().readShelters(is);
+        //Model.getInstance().readShelters(is);
     }
 }
