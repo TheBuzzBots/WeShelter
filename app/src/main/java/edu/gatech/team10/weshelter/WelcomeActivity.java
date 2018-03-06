@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     shelter.setLatitude(Double.parseDouble((String)shelterSnapshot.child("Latitude ").getValue()));
                     shelter.setPhone(shelterSnapshot.child("Phone Number").getValue(String.class));
                     shelter.setName(shelterSnapshot.child("Shelter Name").getValue(String.class));
-                    shelter.setRestriction(shelterSnapshot.child("Restricitons").getValue(String.class));
+                    shelter.setRestriction(shelterSnapshot.child("Restrictions").getValue(String.class));
                     shelter.setSpecialNote(shelterSnapshot.child("Special Notes").getValue(String.class));
                     shelter.setKey(Integer.parseInt((String)shelterSnapshot.child("Unique Key").getValue()));
 
