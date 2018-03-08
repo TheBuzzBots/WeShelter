@@ -29,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     Shelter shelter = new Shelter();
                     shelter.setAddress(shelterSnapshot.child("Address").getValue(String.class));
                     shelter.setCapacity(shelterSnapshot.child("Capacity").getValue(String.class));
+                    shelter.setCapacityInt(Integer.parseInt(shelterSnapshot.child("Int Capacity").getValue(String.class)));
                     shelter.setLongitude(Double.parseDouble((String)shelterSnapshot.child("Longitude ").getValue()));
                     shelter.setLatitude(Double.parseDouble((String)shelterSnapshot.child("Latitude ").getValue()));
                     shelter.setPhone(shelterSnapshot.child("Phone Number").getValue(String.class));
