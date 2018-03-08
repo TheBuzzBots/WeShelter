@@ -8,6 +8,7 @@ public class Shelter {
     private int key;
     private String name;
     private String capacity;
+    private int capacity_int;
     private int currOccupancy;
     private String restriction;
     private double longitude;
@@ -43,6 +44,13 @@ public class Shelter {
     }
     public void setCapacity(String capacity) {
         this.capacity = capacity;
+    }
+
+    public int getCapacityInt() {
+        return this.capacity_int;
+    }
+    public void setCapacityInt(int capacity_int) {
+        this.capacity_int = capacity_int;
     }
 
     public int getCurrOccupancy() {
