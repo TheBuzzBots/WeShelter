@@ -71,13 +71,9 @@ public class ShelterListActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_shelter_list, menu);
 
         // Associate searchable configuration with the SearchView
-        Log.d("boog", "1");
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        Log.d("boog", "2");
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        Log.d("boog", "3");
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        Log.d("boog", "4");
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // listening to search query text change
@@ -216,6 +212,12 @@ public class ShelterListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Enables "fuzzy" searching by converting allowed synonyms into searchable terms
+     *
+     * @param keyword unconverted search input
+     * @return String approved search term or unchanged keyword
+     */
     public String convertSearch(String keyword) {
         if (keyword.equals("male")
                 || keyword.equals("man")
