@@ -6,11 +6,45 @@ package edu.gatech.team10.weshelter;
 
 public class HomelessPerson extends User {
 
+    private boolean reservation;
+    private int resKey;
+    private int resBeds;
+
     public HomelessPerson() {
         super();
     }
 
     public HomelessPerson(String username, String password, String name) {
         super(username, password, name, "User");
+    }
+
+    public boolean hasReservation() {
+        return reservation;
+    }
+
+    public void setReservation(boolean res) {
+        this.reservation = res;
+    }
+
+    public int getResKey() {
+        return resKey;
+    }
+
+    public void setResKey(int key) {
+        this.resKey = key;
+    }
+
+    public int getResBeds() {
+        return resBeds;
+    }
+
+    public void setResBeds(int beds) {
+        this.resBeds = beds;
+    }
+
+    public void makeReservation(int key, int beds) {
+        this.resKey = key;
+        this.resBeds = beds;
+        setReservation(true);
     }
 }

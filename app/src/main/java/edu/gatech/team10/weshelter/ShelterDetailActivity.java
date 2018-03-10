@@ -1,15 +1,20 @@
 package edu.gatech.team10.weshelter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 public class ShelterDetailActivity extends AppCompatActivity {
+
+    private Model model = Model.getInstance();
+    private User user = model.getActiveUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,24 +32,38 @@ public class ShelterDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (user.getType().equals("User")) {
+                    startActivity(new Intent(ShelterDetailActivity.this, ShelterCheckInActivity.class));
+                } else {
+                    Snackbar.make(view, "Admin cannot check-in.", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
-        Model model = Model.getInstance();
         TextView shelterName = (TextView) findViewById(R.id.textView_shelter_detail_name);
         shelterName.setText(model.getActiveShelter().getName());
         TextView restrictions = (TextView) findViewById(R.id.textView_shelter_detail_restrictions);
         restrictions.setText(model.getActiveShelter().getRestriction());
         TextView capacity = (TextView) findViewById(R.id.textView_shelter_detail_capacity);
         capacity.setText(model.getActiveShelter().getCapacity());
+        TextView vacancy = (TextView) findViewById(R.id.textView_shelter_detail_vacancy);
+        vacancy.setText(Integer.toString(model.getActiveShelter().getCapacityInt()));
         TextView address = (TextView) findViewById(R.id.textView_shelter_detail_address);
         address.setText(model.getActiveShelter().getAddress());
         TextView phone = (TextView) findViewById(R.id.textView_shelter_detail_phone);
         phone.setText(model.getActiveShelter().getPhone());
         TextView note = (TextView) findViewById(R.id.textView_shelter_detail_note);
         note.setText(model.getActiveShelter().getSpecialNote());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //update shelter in database
+        // 1) update capacity int with current capacity int
+        // maybe we could make an updateShelter method in the Model as well?
+        TextView vacancy = (TextView) findViewById(R.id.textView_shelter_detail_vacancy);
+        vacancy.setText(Integer.toString(model.getActiveShelter().getCapacityInt()));
     }
 
     @Override
