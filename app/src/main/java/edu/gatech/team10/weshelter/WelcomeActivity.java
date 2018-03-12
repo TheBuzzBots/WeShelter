@@ -17,7 +17,8 @@ import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
     DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
+    DatabaseReference homelessRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson");
+    DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference("User/Admin");
     final private Model model = Model.getInstance();
 
     @Override
@@ -31,7 +32,6 @@ public class WelcomeActivity extends AppCompatActivity {
                     shelter.setAddress(shelterSnapshot.child("Address").getValue(String.class));
                     shelter.setCapacity(shelterSnapshot.child("Capacity").getValue(String.class));
                     shelter.setCapacityInt(Integer.parseInt((String)shelterSnapshot.child("Int Capacity").getValue()));
-                    //System.out.println("Shelter Address: " + shelter.getAddress());
                     shelter.setLongitude(Double.parseDouble((String)shelterSnapshot.child("Longitude ").getValue()));
                     shelter.setLatitude(Double.parseDouble((String)shelterSnapshot.child("Latitude ").getValue()));
                     shelter.setPhone(shelterSnapshot.child("Phone Number").getValue(String.class));
@@ -50,11 +50,12 @@ public class WelcomeActivity extends AppCompatActivity {
                 Log.w("Database Error", "Failed to read value.", error.toException());
             }
         });
-        userRef.addValueEventListener(new ValueEventListener() {
+        homelessRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     HomelessPerson homelessUser = new HomelessPerson();
+                    System.out.println("Address");
                     homelessUser.setResBeds(userSnapshot.child("resBeds").getValue(Long.class).intValue());
                     homelessUser.setReservation(userSnapshot.child("reservation").getValue(Boolean.class));
                     homelessUser.setResKey(userSnapshot.child("resKey").getValue(Long.class).intValue());
@@ -63,6 +64,24 @@ public class WelcomeActivity extends AppCompatActivity {
                     homelessUser.setType(userSnapshot.child("type").getValue(String.class));
                     homelessUser.setUsername(userSnapshot.child("username").getValue(String.class));
                     model.addUser(homelessUser.getUsername(), homelessUser);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Database Error", "Failed to read value.", databaseError.toException());
+            }
+        });
+        adminRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    Admin adminUser = new Admin();
+                    adminUser.setName(userSnapshot.child("name").getValue(String.class));
+                    adminUser.setPassword(userSnapshot.child("password").getValue(String.class));
+                    adminUser.setType(userSnapshot.child("type").getValue(String.class));
+                    adminUser.setUsername(userSnapshot.child("username").getValue(String.class));
+                    model.addUser(adminUser.getUsername(), adminUser);
                 }
             }
 
