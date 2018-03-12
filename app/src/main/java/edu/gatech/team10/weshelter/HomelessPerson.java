@@ -49,7 +49,7 @@ public class HomelessPerson extends User {
         this.resKey = key;
         this.resBeds = beds;
         setReservation(true);
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/" + getUsername());
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson" + getUsername());
         userRef.child("resBeds").setValue(beds);
         userRef.child("resKey").setValue(key);
         userRef.child("reservation").setValue(true);

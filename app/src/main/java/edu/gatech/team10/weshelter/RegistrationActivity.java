@@ -20,7 +20,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText usernameField;
     private EditText passwordField;
     private Spinner typeSpinner;
-    private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
+    private DatabaseReference homelessRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson");
+    private DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference("User/Admin");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +61,12 @@ public class RegistrationActivity extends AppCompatActivity {
             User newUser;
             if (type.equals("User")) {
                 newUser = new HomelessPerson(username, password, name);
+                homelessRef.child(newUser.getUsername()).setValue(newUser);
             } else {
                 newUser = new Admin(username, password, name);
+                adminRef.child(newUser.getUsername()).setValue(newUser);
             }
             Model.getInstance().getUsers().put(usernameField.getText().toString(), newUser);
-            userRef.setValue(Model.getInstance().getUsers());
             startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
         }
     }

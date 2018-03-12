@@ -82,7 +82,7 @@ public class ShelterCheckInActivity extends AppCompatActivity {
             int newCapacity = (shelter.getCapacityInt() + user.getResBeds());
             shelter.setCapacityInt(newCapacity);
             shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity").setValue(Integer.toString(newCapacity));
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/" + user.getUsername());
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson" + user.getUsername());
             userRef.child("resBeds").setValue(0);
             userRef.child("resKey").setValue(0);
             userRef.child("reservation").setValue(false);
