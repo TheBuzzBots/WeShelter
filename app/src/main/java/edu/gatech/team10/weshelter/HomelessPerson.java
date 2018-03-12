@@ -1,5 +1,8 @@
 package edu.gatech.team10.weshelter;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by Adrianna Brown on 2/26/2018.
  */
@@ -18,7 +21,7 @@ public class HomelessPerson extends User {
         super(username, password, name, "User");
     }
 
-    public boolean hasReservation() {
+    public boolean getReservation() {
         return reservation;
     }
 
@@ -46,5 +49,9 @@ public class HomelessPerson extends User {
         this.resKey = key;
         this.resBeds = beds;
         setReservation(true);
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/" + getUsername());
+        userRef.child("resBeds").setValue(beds);
+        userRef.child("resKey").setValue(key);
+        userRef.child("reservation").setValue(true);
     }
 }

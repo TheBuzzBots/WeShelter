@@ -10,11 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ShelterCheckInActivity extends AppCompatActivity {
 
     private EditText neededBeds;
     private HomelessPerson user = (HomelessPerson) Model.getInstance().getActiveUser();
     private Shelter shelter = Model.getInstance().getActiveShelter();
+    DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class ShelterCheckInActivity extends AppCompatActivity {
 
             int numBeds = Integer.parseInt(neededBeds.getText().toString());
 
-            if (user.hasReservation()) {
+            if (user.getReservation()) {
                 Snackbar.make(v, "Please cancel existing reservation before making a new one.",
                         Snackbar.LENGTH_LONG).show();
             } else if (numBeds <= 0) {
@@ -58,10 +62,7 @@ public class ShelterCheckInActivity extends AppCompatActivity {
                 user.makeReservation(shelter.getKey(), numBeds);
                 int newCapacity = (shelter.getCapacityInt() - numBeds);
                 shelter.setCapacityInt(newCapacity);
-                //update user in database
-                //  1) update reservation boolean
-                //  2) update resKey
-                //  3) update resBeds
+                shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity").setValue(Integer.toString(newCapacity));
                 // maybe we could create an updateUser method in the Model if that is easier?
                 finish();
             }
@@ -70,7 +71,7 @@ public class ShelterCheckInActivity extends AppCompatActivity {
 
     public void cancelCheckIn(View v) {
 
-        if (!user.hasReservation()) {
+        if (!user.getReservation()) {
             Snackbar.make(v, "You have no existing reservation to cancel.",
                     Snackbar.LENGTH_LONG).show();
         } else if (user.getResKey() != shelter.getKey()) {
@@ -80,8 +81,11 @@ public class ShelterCheckInActivity extends AppCompatActivity {
             user.setReservation(false);
             int newCapacity = (shelter.getCapacityInt() + user.getResBeds());
             shelter.setCapacityInt(newCapacity);
-            //update user in database
-            // ***same needs as above
+            shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity").setValue(Integer.toString(newCapacity));
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/" + user.getUsername());
+            userRef.child("resBeds").setValue(0);
+            userRef.child("resKey").setValue(0);
+            userRef.child("reservation").setValue(false);
             finish();
         }
 
