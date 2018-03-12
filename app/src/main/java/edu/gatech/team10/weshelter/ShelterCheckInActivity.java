@@ -63,10 +63,6 @@ public class ShelterCheckInActivity extends AppCompatActivity {
                 int newCapacity = (shelter.getCapacityInt() - numBeds);
                 shelter.setCapacityInt(newCapacity);
                 shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity").setValue(Integer.toString(newCapacity));
-                //update user in database
-                //  1) update reservation boolean
-                //  2) update resKey
-                //  3) update resBeds
                 // maybe we could create an updateUser method in the Model if that is easier?
                 finish();
             }
@@ -90,8 +86,6 @@ public class ShelterCheckInActivity extends AppCompatActivity {
             userRef.child("resBeds").setValue(0);
             userRef.child("resKey").setValue(0);
             userRef.child("reservation").setValue(false);
-            //update user in database
-            // ***same needs as above
             finish();
         }
 
