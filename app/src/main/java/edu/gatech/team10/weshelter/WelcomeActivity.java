@@ -23,7 +23,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        shelterRef.addValueEventListener(new ValueEventListener() {
+        shelterRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot shelterSnapshot : dataSnapshot.getChildren()) {
@@ -50,7 +50,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 Log.w("Database Error", "Failed to read value.", error.toException());
             }
         });
-        homelessRef.addValueEventListener(new ValueEventListener() {
+        homelessRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
@@ -71,7 +71,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 Log.w("Database Error", "Failed to read value.", databaseError.toException());
             }
         });
-        adminRef.addValueEventListener(new ValueEventListener() {
+        adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
