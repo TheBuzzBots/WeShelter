@@ -55,7 +55,6 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     HomelessPerson homelessUser = new HomelessPerson();
-                    System.out.println("Address");
                     homelessUser.setResBeds(userSnapshot.child("resBeds").getValue(Long.class).intValue());
                     homelessUser.setReservation(userSnapshot.child("reservation").getValue(Boolean.class));
                     homelessUser.setResKey(userSnapshot.child("resKey").getValue(Long.class).intValue());
