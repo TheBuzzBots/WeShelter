@@ -63,7 +63,6 @@ public class ShelterCheckInActivity extends AppCompatActivity {
                 int newCapacity = (shelter.getCapacityInt() - numBeds);
                 shelter.setCapacityInt(newCapacity);
                 shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity").setValue(Integer.toString(newCapacity));
-                // maybe we could create an updateUser method in the Model if that is easier?
                 finish();
             }
         }
@@ -74,7 +73,7 @@ public class ShelterCheckInActivity extends AppCompatActivity {
         if (!user.getReservation()) {
             Snackbar.make(v, "You have no existing reservation to cancel.",
                     Snackbar.LENGTH_LONG).show();
-        } else if (user.getResKey() != shelter.getKey()) {
+        } else if (!user.isReservedShelter(shelter.getKey())) {
             Snackbar.make(v, "Your existing reservation is not with this shelter.",
                     Snackbar.LENGTH_LONG).show();
         } else {

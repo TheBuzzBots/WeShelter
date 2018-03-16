@@ -28,6 +28,7 @@ public abstract class User {
     public String getPassword(){
         return password;
     }
+
     public String getUsername() {
         return username;
     }
@@ -54,6 +55,14 @@ public abstract class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean checkPassword(String pass) {
+        return password.equals(pass);
+    }
+
+    public boolean canCheckIn() {
+        return type.equals("User");
     }
 
     @Override

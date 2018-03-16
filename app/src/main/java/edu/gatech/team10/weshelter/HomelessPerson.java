@@ -54,4 +54,8 @@ public class HomelessPerson extends User {
         userRef.child("resKey").setValue(key);
         userRef.child("reservation").setValue(true);
     }
+
+    public boolean isReservedShelter(int shelterKey) {
+        return resKey == shelterKey;
+    }
 }
