@@ -101,8 +101,8 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
     }
 
-    private void loadShelters() {
-        InputStream is = getResources().openRawResource(R.raw.shelterdata);
-        //Model.getInstance().readShelters(is);
-    }
+//    private void loadShelters() {
+//        InputStream is = getResources().openRawResource(R.raw.shelterdata);
+//        //Model.getInstance().readShelters(is);
+//    }
 }

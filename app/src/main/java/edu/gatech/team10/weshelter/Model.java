@@ -25,9 +25,6 @@ public class Model extends AppCompatActivity{
     private static final Model _instance = new Model();
     public static Model getInstance() { return _instance; }
 
-
-
-
     /** set of shelters */
     private List<Shelter> _shelters;
 
