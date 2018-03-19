@@ -11,12 +11,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     private EditText nameField;
     private EditText usernameField;
     private EditText passwordField;
     private Spinner typeSpinner;
+    private DatabaseReference homelessRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson");
+    private DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference("User/Admin");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +61,10 @@ public class RegistrationActivity extends AppCompatActivity {
             User newUser;
             if (type.equals("User")) {
                 newUser = new HomelessPerson(username, password, name);
+                homelessRef.child(newUser.getUsername()).setValue(newUser);
             } else {
                 newUser = new Admin(username, password, name);
+                adminRef.child(newUser.getUsername()).setValue(newUser);
             }
             Model.getInstance().getUsers().put(usernameField.getText().toString(), newUser);
             startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));

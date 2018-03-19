@@ -8,5 +8,11 @@
     <string name="title_activity_registration">Registration</string>
     <string name="title_activity_shelter_detail">Shelter Detail</string>
     <string name="action_search">Search</string>
+    <string name="title_activity_shelter_check_in">Check-In to a Shelter</string>
+    <string name="shelter_checkin_label">Number of beds needed:</string>
+    <string name="shelter_checkin_button">CHECK-IN</string>
+    <string name="username_label">Username:</string>
+    <string name="password_label">Password:</string>
+    <string name="cancel_label">Cancel</string>
     <string name="title_activity_maps">Map</string>
 </resources>

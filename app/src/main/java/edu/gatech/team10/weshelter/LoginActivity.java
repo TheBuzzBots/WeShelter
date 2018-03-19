@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         if (users.containsKey(usernameField.getText().toString())) {
             User user = users.get(usernameField.getText().toString());
             //checks if password is correct for specified user
-            if (passwordField.getText().toString().equals(user.getPassword())) {
+            if (user.checkPassword(passwordField.getText().toString())) {
                 Model.getInstance().setActiveUser(user);
                 startActivity(new Intent(LoginActivity.this, ShelterListActivity.class));
             } else {
