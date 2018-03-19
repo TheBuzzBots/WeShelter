@@ -50,8 +50,9 @@ public class ShelterListActivity extends AppCompatActivity {
         fabMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will redirect to map view", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Context context = view.getContext();
+                Intent intent = new Intent(context, MapsActivity.class);
+                startActivity(intent);
             }
         });
 
