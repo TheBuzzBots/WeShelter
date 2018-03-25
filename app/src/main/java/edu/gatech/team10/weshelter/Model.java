@@ -33,6 +33,8 @@ public class Model extends AppCompatActivity{
 
     private Shelter _activeShelter;
 
+    private List<Shelter> _filteredShelters;
+
     /** Set of valid users */
     private Map<String, User> _users;
 
@@ -42,6 +44,7 @@ public class Model extends AppCompatActivity{
     private Model() {
         _users = new HashMap<>();
         _shelters = new ArrayList<>();
+        _filteredShelters = new ArrayList<>();
     }
 
     public List<Shelter> getShelters() {
@@ -86,6 +89,15 @@ public class Model extends AppCompatActivity{
 
     public void addShelter(Shelter shelter) {
         _shelters.add(shelter);
+        _filteredShelters.add(shelter);
+    }
+
+    public void setFilteredShelters(List<Shelter> shelters) {
+        this._filteredShelters =  shelters;
+    }
+
+    public List<Shelter> getFilteredShelters() {
+        return _filteredShelters;
     }
 
     public void setActiveShelter(Shelter activeShelter) {

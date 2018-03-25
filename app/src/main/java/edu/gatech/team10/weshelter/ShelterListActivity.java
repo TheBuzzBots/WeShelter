@@ -207,6 +207,7 @@ public class ShelterListActivity extends AppCompatActivity {
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                     mDatasetFiltered = (ArrayList<Shelter>) filterResults.values;
+                    model.setFilteredShelters(mDatasetFiltered);
                     mAdapter.notifyDataSetChanged();
                 }
             };
