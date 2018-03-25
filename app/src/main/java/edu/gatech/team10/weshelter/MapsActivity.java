@@ -39,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        for (Shelter sh : model.getShelters()) {
+        for (Shelter sh : model.getFilteredShelters()) {
             LatLng pos = new LatLng(sh.getLatitude(), sh.getLongitude());
             mMap.addMarker(new MarkerOptions()
                     .position(pos)
