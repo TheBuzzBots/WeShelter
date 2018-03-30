@@ -5,15 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
     DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
@@ -93,16 +90,20 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
     }
 
+    /**
+     * On button click, goes to Login screen.
+     * @param v current view
+     */
     public void loginFromWelcome(View v){
         startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
     }
 
+    /**
+     * On button click, goes to Registration screen
+     * @param v current view
+     */
     public void registerFromWelcome(View v) {
         startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
     }
 
-//    private void loadShelters() {
-//        InputStream is = getResources().openRawResource(R.raw.shelterdata);
-//        //Model.getInstance().readShelters(is);
-//    }
 }

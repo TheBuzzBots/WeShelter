@@ -1,19 +1,10 @@
 package edu.gatech.team10.weshelter;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Adrianna Brown on 2/18/2018.
@@ -21,22 +12,22 @@ import java.util.Set;
 
 public class Model extends AppCompatActivity{
 
-    /** Singleton instance */
     private static final Model _instance = new Model();
-    public static Model getInstance() { return _instance; }
 
-    /** set of shelters */
     private List<Shelter> _shelters;
-
+    private List<Shelter> _filteredShelters;
     private Shelter _activeShelter;
 
-    private List<Shelter> _filteredShelters;
-
-    /** Set of valid users */
     private Map<String, User> _users;
-
-    /** Current user of the app*/
     private User _activeUser;
+
+    /**
+     * Getter for _instance. Allows other classes in package to access Singleton.
+     * @return Model _instance
+     */
+    public static Model getInstance() {
+        return _instance;
+    }
 
     private Model() {
         _users = new HashMap<>();
@@ -44,83 +35,110 @@ public class Model extends AppCompatActivity{
         _filteredShelters = new ArrayList<>();
     }
 
+    /**
+     * Getter for _shelters.
+     * @return List of all Shelters
+     */
     public List<Shelter> getShelters() {
         return _shelters;
     }
 
-//    public void readShelters(InputStream is) {
-//        BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-//        String line;
-//        try {
-//            br.readLine(); //get rid of header line
-//            while ((line = br.readLine()) != null) {
-//
-//                String[] data = line.split("\\|");
-//                Shelter shelter = new Shelter();
-//
-//                int key = Integer.parseInt(data[0]);
-//                double longitude = Double.parseDouble(data[4]);
-//                double latitude = Double.parseDouble(data[5]);
-//
-//                shelter.setKey(key);
-//                shelter.setName(data[1]);
-//                shelter.setCapacity(data[2]);
-//                shelter.setRestriction(data[3]);
-//                shelter.setLongitude(longitude);
-//                shelter.setLatitude(latitude);
-//                shelter.setAddress(data[6]);
-//                shelter.setSpecialNote(data[7]);
-//                shelter.setPhone(data[8]);
-//
-//                addShelter(shelter);
-//            }
-//            br.close();
-//        } catch (IOException e) {
-//            Log.e("IO", "error reading assets", e);
-//        }
-//    }
-
+    /**
+     * Setter for _shelters.
+     * @param shelters list of shelters to set _shelters to
+     */
     public void setShelters(List<Shelter> shelters) {
         this._shelters = shelters;
     }
 
+    /**
+     * Adds a Shelter to the list of all Shelters.
+     * @param shelter the Shelter to be added
+     */
     public void addShelter(Shelter shelter) {
         _shelters.add(shelter);
         _filteredShelters.add(shelter);
     }
 
+    /**
+     * Setter for _filteredShelters (a specific subset of _shelters).
+     * @param shelters list of shelters to set _filteredShelters to
+     */
     public void setFilteredShelters(List<Shelter> shelters) {
         this._filteredShelters =  shelters;
     }
 
+    /**
+     * Getter for _filteredShelters.
+     * @return List of filtered shelters
+     */
     public List<Shelter> getFilteredShelters() {
         return _filteredShelters;
     }
 
+    /**
+     * Setter for _activeShelter (Shelter selected by the User).
+     * @param activeShelter the current Shelter
+     */
     public void setActiveShelter(Shelter activeShelter) {
         this._activeShelter = activeShelter;
     }
 
+    /**
+     * Getter for _activeShelter.
+     * @return Shelter the current Shelter
+     */
     public Shelter getActiveShelter() {
         return _activeShelter;
     }
 
-    /** @param activeUser the current active user of the app */
+    /**
+     * Setter for _activeUser (User currently using the app)
+     * @param activeUser the current active user of the app
+     * */
     public void setActiveUser(User activeUser) {
         _activeUser = activeUser;
     }
 
-    /** @return User the current active user of the app */
+    /**
+     * Getter for _activeUser.
+     * @return User the current active user of the app
+     * */
     public User getActiveUser() {
         return _activeUser;
     }
 
+    /**
+     * Getter for _users.
+     * @return Map of all valid users
+     */
     public Map<String, User> getUsers() {
         return _users;
     }
 
+    /**
+     * Adds a new User to the list of valid users.
+     * @param username username of the new User
+     * @param user User instance
+     */
     public void addUser(String username, User user) {
         _users.put(username, user);
     }
 
+    /**
+     * Checks if a valid User exists in _users matching the given credentials.
+     * @param user the username of the User
+     * @param pass the password of the User
+     * @return boolean if the User is a valid user
+     */
+    public boolean isValidUser(String user, String pass) {
+        if (user == null || pass == null) {
+            return false;
+        } else if (!_users.containsKey(user)) {
+            return false;
+        } else {
+            User u = _users.get(user);
+            return u.checkPassword(pass);
+        }
+    }
 }
