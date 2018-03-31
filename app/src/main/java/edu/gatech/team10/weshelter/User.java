@@ -93,7 +93,7 @@ public abstract class User {
 
     /**
      * Setter for type.
-     * @param type
+     * @param type type of user
      */
     public void setType(String type) {
         if (legalTypes.contains(type)) {

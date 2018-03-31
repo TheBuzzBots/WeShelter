@@ -21,6 +21,8 @@ public class Model extends AppCompatActivity{
     private Map<String, User> _users;
     private User _activeUser;
 
+    private boolean hasLoadedData;
+
     /**
      * Getter for _instance. Allows other classes in package to access Singleton.
      * @return Model _instance
@@ -114,6 +116,22 @@ public class Model extends AppCompatActivity{
      */
     public Map<String, User> getUsers() {
         return _users;
+    }
+
+    /**
+     * Setter for hasLoadedData.
+     * @param status whether the data has been loaded or not
+     */
+    public void setHasLoadedData(boolean status) {
+        this.hasLoadedData = status;
+    }
+
+    /**
+     * Getter for hasLoadedData.
+     * @return whether or not the data has already been loaded once.
+     */
+    public boolean getHasLoadedData() {
+        return hasLoadedData;
     }
 
     /**
