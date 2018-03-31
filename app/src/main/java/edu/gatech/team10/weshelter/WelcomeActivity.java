@@ -5,15 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.InputStream;
 
 public class WelcomeActivity extends AppCompatActivity {
     DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
@@ -23,86 +20,93 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        shelterRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot shelterSnapshot : dataSnapshot.getChildren()) {
+        if (!(model.getHasLoadedData())) {
+            model.setHasLoadedData(true);
+            shelterRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot shelterSnapshot : dataSnapshot.getChildren()) {
 
-                    Shelter shelter = new Shelter();
-                    shelter.setAddress(shelterSnapshot.child("Address").getValue(String.class));
-                    shelter.setCapacity(shelterSnapshot.child("Capacity").getValue(String.class));
-                    shelter.setCapacityInt(Integer.parseInt((String)shelterSnapshot.child("Int Capacity").getValue()));
-                    shelter.setLongitude(Double.parseDouble((String)shelterSnapshot.child("Longitude ").getValue()));
-                    shelter.setLatitude(Double.parseDouble((String)shelterSnapshot.child("Latitude ").getValue()));
-                    shelter.setPhone(shelterSnapshot.child("Phone Number").getValue(String.class));
-                    shelter.setName(shelterSnapshot.child("Shelter Name").getValue(String.class));
-                    shelter.setRestriction(shelterSnapshot.child("Restrictions").getValue(String.class));
-                    shelter.setSpecialNote(shelterSnapshot.child("Special Notes").getValue(String.class));
-                    shelter.setKey(Integer.parseInt((String)shelterSnapshot.child("Unique Key").getValue()));
-                    shelter.setCapacityInt(Integer.parseInt((String) shelterSnapshot.child("Int Capacity").getValue()));
-                    model.addShelter(shelter);
+                        Shelter shelter = new Shelter();
+                        shelter.setAddress(shelterSnapshot.child("Address").getValue(String.class));
+                        shelter.setCapacity(shelterSnapshot.child("Capacity").getValue(String.class));
+                        shelter.setCapacityInt(Integer.parseInt((String) shelterSnapshot.child("Int Capacity").getValue()));
+                        shelter.setLongitude(Double.parseDouble((String) shelterSnapshot.child("Longitude ").getValue()));
+                        shelter.setLatitude(Double.parseDouble((String) shelterSnapshot.child("Latitude ").getValue()));
+                        shelter.setPhone(shelterSnapshot.child("Phone Number").getValue(String.class));
+                        shelter.setName(shelterSnapshot.child("Shelter Name").getValue(String.class));
+                        shelter.setRestriction(shelterSnapshot.child("Restrictions").getValue(String.class));
+                        shelter.setSpecialNote(shelterSnapshot.child("Special Notes").getValue(String.class));
+                        shelter.setKey(Integer.parseInt((String) shelterSnapshot.child("Unique Key").getValue()));
+                        shelter.setCapacityInt(Integer.parseInt((String) shelterSnapshot.child("Int Capacity").getValue()));
+                        model.addShelter(shelter);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Database Error", "Failed to read value.", error.toException());
-            }
-        });
-        homelessRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    HomelessPerson homelessUser = new HomelessPerson();
-                    homelessUser.setResBeds(userSnapshot.child("resBeds").getValue(Long.class).intValue());
-                    homelessUser.setReservation(userSnapshot.child("reservation").getValue(Boolean.class));
-                    homelessUser.setResKey(userSnapshot.child("resKey").getValue(Long.class).intValue());
-                    homelessUser.setName(userSnapshot.child("name").getValue(String.class));
-                    homelessUser.setPassword(userSnapshot.child("password").getValue(String.class));
-                    homelessUser.setType(userSnapshot.child("type").getValue(String.class));
-                    homelessUser.setUsername(userSnapshot.child("username").getValue(String.class));
-                    model.addUser(homelessUser.getUsername(), homelessUser);
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("Database Error", "Failed to read value.", error.toException());
                 }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("Database Error", "Failed to read value.", databaseError.toException());
-            }
-        });
-        adminRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    Admin adminUser = new Admin();
-                    adminUser.setName(userSnapshot.child("name").getValue(String.class));
-                    adminUser.setPassword(userSnapshot.child("password").getValue(String.class));
-                    adminUser.setType(userSnapshot.child("type").getValue(String.class));
-                    adminUser.setUsername(userSnapshot.child("username").getValue(String.class));
-                    model.addUser(adminUser.getUsername(), adminUser);
+            });
+            homelessRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        HomelessPerson homelessUser = new HomelessPerson();
+                        homelessUser.setResBeds(userSnapshot.child("resBeds").getValue(Long.class).intValue());
+                        homelessUser.setReservation(userSnapshot.child("reservation").getValue(Boolean.class));
+                        homelessUser.setResKey(userSnapshot.child("resKey").getValue(Long.class).intValue());
+                        homelessUser.setName(userSnapshot.child("name").getValue(String.class));
+                        homelessUser.setPassword(userSnapshot.child("password").getValue(String.class));
+                        homelessUser.setType(userSnapshot.child("type").getValue(String.class));
+                        homelessUser.setUsername(userSnapshot.child("username").getValue(String.class));
+                        model.addUser(homelessUser.getUsername(), homelessUser);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("Database Error", "Failed to read value.", databaseError.toException());
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("Database Error", "Failed to read value.", databaseError.toException());
+                }
+            });
+            adminRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        Admin adminUser = new Admin();
+                        adminUser.setName(userSnapshot.child("name").getValue(String.class));
+                        adminUser.setPassword(userSnapshot.child("password").getValue(String.class));
+                        adminUser.setType(userSnapshot.child("type").getValue(String.class));
+                        adminUser.setUsername(userSnapshot.child("username").getValue(String.class));
+                        model.addUser(adminUser.getUsername(), adminUser);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("Database Error", "Failed to read value.", databaseError.toException());
+                }
+            });
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
     }
 
+    /**
+     * On button click, goes to Login screen.
+     * @param v current view
+     */
     public void loginFromWelcome(View v){
         startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
     }
 
+    /**
+     * On button click, goes to Registration screen
+     * @param v current view
+     */
     public void registerFromWelcome(View v) {
         startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
     }
 
-//    private void loadShelters() {
-//        InputStream is = getResources().openRawResource(R.raw.shelterdata);
-//        //Model.getInstance().readShelters(is);
-//    }
 }

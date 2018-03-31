@@ -1,8 +1,6 @@
 package edu.gatech.team10.weshelter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +39,10 @@ public class ShelterCheckInActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Verifies the attempt to check into a shelter.
+     * @param v current view
+     */
     public void verifyCheckIn(View v) {
 
         if (neededBeds.getText().toString().equals("")) {
@@ -52,22 +54,24 @@ public class ShelterCheckInActivity extends AppCompatActivity {
             if (user.getReservation()) {
                 Snackbar.make(v, "Please cancel existing reservation before making a new one.",
                         Snackbar.LENGTH_LONG).show();
-            } else if (numBeds <= 0) {
+            } else if (!shelter.isValidBeds(numBeds)) {
                 Snackbar.make(v, "Please select a valid number of beds.",
                         Snackbar.LENGTH_LONG).show();
-            } else if (numBeds > shelter.getCapacityInt()) {
-                Snackbar.make(v, "The number of beds selected exceeds the number of beds available.",
-                        Snackbar.LENGTH_LONG).show();
             } else {
+                shelter.changeCapacity(numBeds, true);
                 user.makeReservation(shelter.getKey(), numBeds);
-                int newCapacity = (shelter.getCapacityInt() - numBeds);
-                shelter.setCapacityInt(newCapacity);
-                shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity").setValue(Integer.toString(newCapacity));
+
+                shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity")
+                        .setValue(Integer.toString(shelter.getCapacityInt()));
                 finish();
             }
         }
     }
 
+    /**
+     * Cancels an existing reservation with the current shelter.
+     * @param v current view
+     */
     public void cancelCheckIn(View v) {
 
         if (!user.getReservation()) {
@@ -77,11 +81,13 @@ public class ShelterCheckInActivity extends AppCompatActivity {
             Snackbar.make(v, "Your existing reservation is not with this shelter.",
                     Snackbar.LENGTH_LONG).show();
         } else {
-            user.setReservation(false);
-            int newCapacity = (shelter.getCapacityInt() + user.getResBeds());
-            shelter.setCapacityInt(newCapacity);
-            shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity").setValue(Integer.toString(newCapacity));
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson/" + user.getUsername());
+            shelter.changeCapacity(user.getResBeds(), false);
+            user.cancelReservation();
+
+            shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity")
+                    .setValue(Integer.toString(shelter.getCapacityInt()));
+            DatabaseReference userRef = FirebaseDatabase.getInstance()
+                    .getReference("User/HomelessPerson/" + user.getUsername());
             userRef.child("resBeds").setValue(0);
             userRef.child("resKey").setValue(0);
             userRef.child("reservation").setValue(false);
