@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -32,7 +31,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (user.getType().equals("User")) {
+                if (user.canCheckIn()) {
                     startActivity(new Intent(ShelterDetailActivity.this, ShelterCheckInActivity.class));
                 } else {
                     Snackbar.make(view, "Admin cannot check-in.", Snackbar.LENGTH_LONG).show();
@@ -59,9 +58,6 @@ public class ShelterDetailActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        //update shelter in database
-        // 1) update capacity int with current capacity int
-        // maybe we could make an updateShelter method in the Model as well?
         TextView vacancy = (TextView) findViewById(R.id.textView_shelter_detail_vacancy);
         vacancy.setText(Integer.toString(model.getActiveShelter().getCapacityInt()));
     }

@@ -14,4 +14,5 @@
     <string name="username_label">Username:</string>
     <string name="password_label">Password:</string>
     <string name="cancel_label">Cancel</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
