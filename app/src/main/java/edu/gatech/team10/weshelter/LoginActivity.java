@@ -12,9 +12,6 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText usernameField;
-    private EditText passwordField;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +34,8 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void verifyLogin(View v) {
         //gets text input from view fields
-        usernameField = (EditText) findViewById(R.id.editText_login_username);
-        passwordField = (EditText) findViewById(R.id.editText_login_password);
+        EditText usernameField = (EditText) findViewById(R.id.editText_login_username);
+        EditText passwordField = (EditText) findViewById(R.id.editText_login_password);
 
         String username = usernameField.getText().toString();
         String password = passwordField.getText().toString();

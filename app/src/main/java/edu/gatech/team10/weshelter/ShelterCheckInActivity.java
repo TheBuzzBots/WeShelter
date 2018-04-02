@@ -12,8 +12,11 @@ import android.widget.EditText;
 public class ShelterCheckInActivity extends AppCompatActivity {
 
     private EditText neededBeds;
-    private HomelessPerson user = (HomelessPerson) Model.getInstance().getActiveUser();
-    private Shelter shelter = Model.getInstance().getActiveShelter();
+    final private Model model = Model.getInstance();
+    private Shelter shelter = model.getActiveShelter();
+
+    //guaranteed to be a HomelessPerson instance due to type check in calling activity
+    private HomelessPerson user = (HomelessPerson) model.getActiveUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,6 @@ public class ShelterCheckInActivity extends AppCompatActivity {
             } else {
                 shelter.changeCapacity(numBeds, true);
                 user.makeReservation(shelter.getKey(), numBeds);
-
                 finish();
             }
         }
