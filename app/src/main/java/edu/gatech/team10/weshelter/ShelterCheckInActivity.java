@@ -8,15 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ShelterCheckInActivity extends AppCompatActivity {
 
     private EditText neededBeds;
     private HomelessPerson user = (HomelessPerson) Model.getInstance().getActiveUser();
     private Shelter shelter = Model.getInstance().getActiveShelter();
-    DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +58,6 @@ public class ShelterCheckInActivity extends AppCompatActivity {
                 shelter.changeCapacity(numBeds, true);
                 user.makeReservation(shelter.getKey(), numBeds);
 
-                shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity")
-                        .setValue(Integer.toString(shelter.getCapacityInt()));
                 finish();
             }
         }
@@ -83,14 +78,6 @@ public class ShelterCheckInActivity extends AppCompatActivity {
         } else {
             shelter.changeCapacity(user.getResBeds(), false);
             user.cancelReservation();
-
-            shelterRef.child(Integer.toString(shelter.getKey())).child("Int Capacity")
-                    .setValue(Integer.toString(shelter.getCapacityInt()));
-            DatabaseReference userRef = FirebaseDatabase.getInstance()
-                    .getReference("User/HomelessPerson/" + user.getUsername());
-            userRef.child("resBeds").setValue(0);
-            userRef.child("resKey").setValue(0);
-            userRef.child("reservation").setValue(false);
             finish();
         }
 
