@@ -1,5 +1,7 @@
 package edu.gatech.team10.weshelter;
 
+import com.google.firebase.database.DatabaseReference;
+
 /**
  * Created by Adrianna Brown on 2/24/2018.
  */
@@ -200,6 +202,9 @@ public class Shelter {
 
     /**
      * Changes capacity_int to reflect current vacancies.
+     *
+     * Has to violate the Law of Demeter
+     * Otherwise, Shelters in Firebase must have have a FirebaseDB attribute.
      * @param beds number of beds to be changed by
      * @param subtract true if beds should be removed, false if beds should be added
      */
@@ -218,6 +223,8 @@ public class Shelter {
         }
 
         this.capacity_int = newCapacity;
+        FirebaseDB database = new FirebaseDB();
+        database.changeShelterCapacity(key, newCapacity);
     }
 
     /**

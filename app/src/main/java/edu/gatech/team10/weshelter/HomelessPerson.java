@@ -1,7 +1,5 @@
 package edu.gatech.team10.weshelter;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Adrianna Brown on 2/26/2018.
@@ -80,6 +78,9 @@ public class HomelessPerson extends User {
 
     /**
      * Makes a reservation for the HP.
+     *
+     * Has to violate the Law of Demeter.
+     * Otherwise, Homeless Users in Firebase must have a Firebase attribute.
      * @param key the key of the Shelter at which the HP is making a reservation
      * @param beds the number of beds that the HP has reserved
      */
@@ -87,19 +88,22 @@ public class HomelessPerson extends User {
         this.resBeds = beds;
         this.resKey = key;
         this.reservation = true;
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson/" +(getUsername()));
-        userRef.child("resBeds").setValue(beds);
-        userRef.child("resKey").setValue(resKey);
-        userRef.child("reservation").setValue(true);
+        FirebaseDB database = new FirebaseDB();
+        database.HomelessPersonCheckIn(getUsername(), resKey, resBeds, reservation);
     }
 
     /**
      * Cancels the HP's reservation.
+     *
+     * Has to violate the Law of Demeter.
+     * Otherwise, Homeless Users in Firebase must have a Firebase attribute.
      */
     public void cancelReservation() {
         this.reservation = false;
         this.resBeds = 0;
         this.resKey = 0;
+        FirebaseDB database = new FirebaseDB();
+        database.HomelessPersonCheckIn(getUsername(), resKey, resBeds, reservation);
     }
 
     /**
