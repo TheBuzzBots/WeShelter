@@ -203,9 +203,6 @@ public class Shelter {
 
     /**
      * Changes capacity_int to reflect current vacancies.
-     *
-     * Has to violate the Law of Demeter
-     * Otherwise, Shelters in Firebase must have have a FirebaseDB attribute.
      * @param beds number of beds to be changed by
      * @param subtract true if beds should be removed, false if beds should be added
      */
@@ -213,14 +210,14 @@ public class Shelter {
         int newCapacity;
         int numBeds = beds;
 
-        if (beds < 0) {
-            numBeds = (-1) * beds;
-        }
-
         if (subtract) {
             newCapacity = capacity_int - numBeds;
         } else {
             newCapacity = capacity_int + numBeds;
+        }
+
+        if (newCapacity < 0) {
+            return;
         }
 
         this.capacity_int = newCapacity;
