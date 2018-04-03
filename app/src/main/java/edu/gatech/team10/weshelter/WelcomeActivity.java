@@ -14,7 +14,6 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (!(model.getHasLoadedData())) {
-            model.setDatabase(new FirebaseDB());
             model.setHasLoadedData(true);
             database.readShelters();
             database.readHomelessPerson();

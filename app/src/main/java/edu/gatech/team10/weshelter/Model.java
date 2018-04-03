@@ -13,7 +13,7 @@ import java.util.Map;
 public class Model extends AppCompatActivity{
 
     private static final Model _instance = new Model();
-    private DBInterface _database;
+    private DBInterface _database = new FirebaseDB();
 
     private List<Shelter> _shelters;
     private List<Shelter> _filteredShelters;
