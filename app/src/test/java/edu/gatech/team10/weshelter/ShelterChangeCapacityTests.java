@@ -4,32 +4,20 @@ import org.junit.Test;
 import org.junit.Before;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 /**
- * Adrianna Brown
- * Unit tests for changeCapacity() in Shelter.
- *
- * Covers if-statement based on subtract boolean.
- * Covers every int beds partition.
- * Covers if-statement when newCapacity is negative.
+ * Created by Adrianna Brown on 4/3/2018.
  */
+
 public class ShelterChangeCapacityTests {
-    private Model testModel;
+
     private Shelter shelter;
-    private DBInterface db;
 
     /**
-     * Sets up mock database to ensure no calls are made to production database during testing.
+     * Sets up model and shelter.
      */
     @Before
     public void setUp() {
-        testModel = Model.getInstance();
-        db = mock(DBInterface.class);
-        testModel.setDatabase(db);
-
-        doNothing().when(db).changeShelterCapacity(isA(Integer.class), isA(Integer.class));
-
         shelter = new Shelter();
         shelter.setCapacityInt(100);
         shelter.setKey(13);

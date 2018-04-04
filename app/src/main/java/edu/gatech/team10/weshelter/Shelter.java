@@ -1,5 +1,7 @@
 package edu.gatech.team10.weshelter;
 
+import com.google.firebase.database.DatabaseReference;
+
 /**
  * Created by Adrianna Brown on 2/24/2018.
  */
@@ -15,9 +17,6 @@ public class Shelter {
     private String address;
     private String specialNote;
     private String phone;
-
-    final private Model model = Model.getInstance();
-    private DBInterface database = model.getDatabase();
 
     /**
      * Constructs a Shelter with a null name.
@@ -38,7 +37,7 @@ public class Shelter {
      * Getter for unique key identifying Shelter.
      * @return int key of shelter
      */
-    int getKey() {
+    public int getKey() {
         return this.key;
     }
 
@@ -46,7 +45,7 @@ public class Shelter {
      * Setter for unique key.
      * @param key id number to set key to
      */
-    void setKey(int key) {
+    public void setKey(int key) {
         this.key = key;
     }
 
@@ -70,7 +69,7 @@ public class Shelter {
      * Getter for capacity (the String representing specific room types, if specified).
      * @return String the specific capacity
      */
-    String getCapacity() {
+    public String getCapacity() {
         return this.capacity;
     }
 
@@ -78,7 +77,7 @@ public class Shelter {
      * Setter for capacity.
      * @param capacity the specific capacity for the Shelter
      */
-    void setCapacity(String capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 
@@ -86,7 +85,7 @@ public class Shelter {
      * Getter for capacity_int (the int representing the general number of beds).
      * @return int number of beds available
      */
-    int getCapacityInt() {
+    public int getCapacityInt() {
         return this.capacity_int;
     }
 
@@ -94,7 +93,7 @@ public class Shelter {
      * Setter for capacity_int.
      * @param capacity_int the current number of beds available
      */
-    void setCapacityInt(int capacity_int) {
+    public void setCapacityInt(int capacity_int) {
         if (capacity_int >= 0) {
             this.capacity_int = capacity_int;
         }
@@ -104,7 +103,7 @@ public class Shelter {
      * Getter for restriction (types of people Shelter service is limited to).
      * @return String demographic restriction
      */
-    String getRestriction() {
+    public String getRestriction() {
         return this.restriction;
     }
 
@@ -112,7 +111,7 @@ public class Shelter {
      * Setter for restriction.
      * @param restriction demographic restriction
      */
-    void setRestriction(String restriction) {
+    public void setRestriction(String restriction) {
         this.restriction = restriction;
     }
 
@@ -120,7 +119,7 @@ public class Shelter {
      * Getter for specialNote (extra details about the Shelter).
      * @return String about the shelter
      */
-    String getSpecialNote() {
+    public String getSpecialNote() {
         return specialNote;
     }
 
@@ -128,7 +127,7 @@ public class Shelter {
      * Setter for specialNote.
      * @param specialNote about the shelter
      */
-    void setSpecialNote(String specialNote) {
+    public void setSpecialNote(String specialNote) {
         this.specialNote = specialNote;
     }
 
@@ -136,7 +135,7 @@ public class Shelter {
      * Getter for longitude (location of Shelter).
      * @return double shelter's longitude
      */
-    double getLongitude() {
+    public double getLongitude() {
         return this.longitude;
     }
 
@@ -144,7 +143,7 @@ public class Shelter {
      * Setter for longitude.
      * @param longitude shelter's longitude
      */
-    void setLongitude(double longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -152,7 +151,7 @@ public class Shelter {
      * Getter for latitude (location of Shelter)
      * @return double shelter's latitude
      */
-    double getLatitude() {
+    public double getLatitude() {
         return this.latitude;
     }
 
@@ -160,7 +159,7 @@ public class Shelter {
      * Setter for latitude.
      * @param latitude shelter's latitude
      */
-    void setLatitude(double latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -168,7 +167,7 @@ public class Shelter {
      * Getter for address.
      * @return String shelter's address
      */
-    String getAddress() {
+    public String getAddress() {
         return this.address;
     }
 
@@ -176,7 +175,7 @@ public class Shelter {
      * Setter for address.
      * @param address shelter's address
      */
-    void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -184,7 +183,7 @@ public class Shelter {
      * Getter for phone (the phone number for the shelter).
      * @return String shelter's phone number
      */
-    String getPhone() {
+    public String getPhone() {
         return this.phone;
     }
 
@@ -192,7 +191,7 @@ public class Shelter {
      * Setter for phone.
      * @param phone shelter's phone number
      */
-    void setPhone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -203,17 +202,19 @@ public class Shelter {
 
     /**
      * Changes capacity_int to reflect current vacancies.
+     *
+     * Has to violate the Law of Demeter
+     * Otherwise, Shelters in Firebase must have have a FirebaseDB attribute.
      * @param beds number of beds to be changed by
      * @param subtract true if beds should be removed, false if beds should be added
      */
-    void changeCapacity(int beds, boolean subtract) {
+    public void changeCapacity(int beds, boolean subtract) {
         int newCapacity;
-        int numBeds = beds;
 
         if (subtract) {
-            newCapacity = capacity_int - numBeds;
+            newCapacity = capacity_int - beds;
         } else {
-            newCapacity = capacity_int + numBeds;
+            newCapacity = capacity_int + beds;
         }
 
         if (newCapacity < 0) {
@@ -221,7 +222,6 @@ public class Shelter {
         }
 
         this.capacity_int = newCapacity;
-        database.changeShelterCapacity(key, newCapacity);
     }
 
     /**
@@ -229,7 +229,7 @@ public class Shelter {
      * @param beds number of beds requested
      * @return whether a reservation can be made for the requested number of beds
      */
-    boolean isValidBeds(int beds) {
+    public boolean isValidBeds(int beds) {
         if (beds <= 0) {
             return false;
         } else if (beds > capacity_int) {
