@@ -1,7 +1,5 @@
 package edu.gatech.team10.weshelter;
 
-import com.google.firebase.database.DatabaseReference;
-
 /**
  * Created by Adrianna Brown on 2/24/2018.
  */
