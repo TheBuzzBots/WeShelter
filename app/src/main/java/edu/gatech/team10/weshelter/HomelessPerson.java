@@ -1,6 +1,5 @@
 package edu.gatech.team10.weshelter;
 
-
 /**
  * Created by Adrianna Brown on 2/26/2018.
  */
@@ -11,10 +10,13 @@ public class HomelessPerson extends User {
     private int resKey;
     private int resBeds;
 
+    final private Model model = Model.getInstance();
+    private DBInterface database = model.getDatabase();
+
     /**
      * Constructs a default HomelessPerson (HP) User. See abstract User class.
      */
-    public HomelessPerson() {
+    HomelessPerson() {
         super();
     }
 
@@ -24,7 +26,7 @@ public class HomelessPerson extends User {
      * @param password password of HomelessPerson
      * @param name name of HomelessPerson
      */
-    public HomelessPerson(String username, String password, String name) {
+    HomelessPerson(String username, String password, String name) {
         super(username, password, name, "User");
     }
 
@@ -32,7 +34,7 @@ public class HomelessPerson extends User {
      * Getter for reservation boolean.
      * @return boolean if the User already has a reservation
      */
-    public boolean getReservation() {
+    boolean getReservation() {
         return reservation;
     }
 
@@ -40,7 +42,7 @@ public class HomelessPerson extends User {
      * Setter for reservation boolean.
      * @param res whether or not the User has a reservation at a Shelter
      */
-    public void setReservation(boolean res) {
+    void setReservation(boolean res) {
         this.reservation = res;
     }
 
@@ -48,7 +50,7 @@ public class HomelessPerson extends User {
      * Getter for resKey value.
      * @return int the key of the Shelter with which the HP has a reservation
      */
-    public int getResKey() {
+    int getResKey() {
         return resKey;
     }
 
@@ -56,7 +58,7 @@ public class HomelessPerson extends User {
      * Setter for resKey value.
      * @param key int the key of the Shelter with which the HP is making a reservation
      */
-    public void setResKey(int key) {
+    void setResKey(int key) {
         this.resKey = key;
     }
 
@@ -64,7 +66,7 @@ public class HomelessPerson extends User {
      * Getter for resBeds value.
      * @return int number of beds the HP has reserved
      */
-    public int getResBeds() {
+    int getResBeds() {
         return resBeds;
     }
 
@@ -72,7 +74,7 @@ public class HomelessPerson extends User {
      * Setter for resBeds value.
      * @param beds the number of beds the HP has reserved
      */
-    public void setResBeds(int beds) {
+    void setResBeds(int beds) {
         this.resBeds = beds;
     }
 
@@ -84,11 +86,10 @@ public class HomelessPerson extends User {
      * @param key the key of the Shelter at which the HP is making a reservation
      * @param beds the number of beds that the HP has reserved
      */
-    public void makeReservation(int key, int beds) {
+    void makeReservation(int key, int beds) {
         this.resBeds = beds;
         this.resKey = key;
         this.reservation = true;
-        FirebaseDB database = new FirebaseDB();
         database.HomelessPersonCheckIn(getUsername(), resKey, resBeds, reservation);
     }
 
@@ -98,11 +99,10 @@ public class HomelessPerson extends User {
      * Has to violate the Law of Demeter.
      * Otherwise, Homeless Users in Firebase must have a Firebase attribute.
      */
-    public void cancelReservation() {
+    void cancelReservation() {
         this.reservation = false;
         this.resBeds = 0;
         this.resKey = 0;
-        FirebaseDB database = new FirebaseDB();
         database.HomelessPersonCheckIn(getUsername(), resKey, resBeds, reservation);
     }
 
@@ -111,7 +111,7 @@ public class HomelessPerson extends User {
      * @param shelterKey unique key identifier of Shelter
      * @return boolean if the HP has a reservation at the given Shelter
      */
-    public boolean isReservedShelter(int shelterKey) {
+    boolean isReservedShelter(int shelterKey) {
         return resKey == shelterKey;
     }
 }

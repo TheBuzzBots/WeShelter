@@ -210,21 +210,18 @@ public class Shelter {
      */
     public void changeCapacity(int beds, boolean subtract) {
         int newCapacity;
-        int numBeds = beds;
-
-        if (beds < 0) {
-            numBeds = (-1) * beds;
-        }
 
         if (subtract) {
-            newCapacity = capacity_int - numBeds;
+            newCapacity = capacity_int - beds;
         } else {
-            newCapacity = capacity_int + numBeds;
+            newCapacity = capacity_int + beds;
+        }
+
+        if (newCapacity < 0) {
+            return;
         }
 
         this.capacity_int = newCapacity;
-        FirebaseDB database = new FirebaseDB();
-        database.changeShelterCapacity(key, newCapacity);
     }
 
     /**

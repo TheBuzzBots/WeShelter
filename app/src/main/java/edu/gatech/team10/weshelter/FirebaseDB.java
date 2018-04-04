@@ -14,12 +14,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class FirebaseDB implements DBInterface {
 
-    DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
-    DatabaseReference homelessRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson");
-    DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference("User/Admin");
+    private DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
+    private DatabaseReference homelessRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson");
+    private DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference("User/Admin");
     final private Model model = Model.getInstance();
 
-    public void readShelters(){
+    public void readShelters() {
         shelterRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

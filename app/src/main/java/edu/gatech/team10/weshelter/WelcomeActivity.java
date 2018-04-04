@@ -8,8 +8,8 @@ import android.view.View;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private FirebaseDB database = new FirebaseDB();
     final private Model model = Model.getInstance();
+    private DBInterface database = model.getDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

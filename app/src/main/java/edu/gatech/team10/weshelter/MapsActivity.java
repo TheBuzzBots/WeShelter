@@ -12,7 +12,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
     final private Model model = Model.getInstance();
 
     @Override
@@ -37,15 +36,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
         for (Shelter sh : model.getFilteredShelters()) {
             LatLng pos = new LatLng(sh.getLatitude(), sh.getLongitude());
-            mMap.addMarker(new MarkerOptions()
+            googleMap.addMarker(new MarkerOptions()
                     .position(pos)
                     .title(sh.getName())
                     .snippet("Phone Number: " + sh.getPhone()));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 11f));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 11f));
         }
     }
 }

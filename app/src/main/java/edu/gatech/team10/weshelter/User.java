@@ -12,7 +12,7 @@ public abstract class User {
     private String username;
     private String password;
     private String type;
-    public static List<String> legalTypes = Arrays.asList("User", "Admin");
+    static List<String> legalTypes = Arrays.asList("User", "Admin");
 
     /**
      * Constructs a default User.
@@ -63,7 +63,7 @@ public abstract class User {
      * Setter for password.
      * @param password password of the user
      */
-    public void setPassword(String password){
+    void setPassword(String password){
         this.password = password;
     }
 
@@ -95,7 +95,7 @@ public abstract class User {
      * Setter for type.
      * @param type type of user
      */
-    public void setType(String type) {
+    void setType(String type) {
         if (legalTypes.contains(type)) {
             this.type = type;
         }
@@ -106,7 +106,7 @@ public abstract class User {
      * @param pass password provided
      * @return boolean whether or not pass matches password
      */
-    public boolean checkPassword(String pass) {
+    boolean checkPassword(String pass) {
         return password.equals(pass);
     }
 
@@ -114,7 +114,7 @@ public abstract class User {
      * Checks if a User is able to use the check-in feature
      * @return boolean if the User can check-in
      */
-    public boolean canCheckIn() {
+    boolean canCheckIn() {
         return type.equals("User");
     }
 
