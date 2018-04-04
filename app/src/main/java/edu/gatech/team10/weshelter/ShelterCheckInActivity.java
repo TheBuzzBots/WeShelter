@@ -56,6 +56,8 @@ public class ShelterCheckInActivity extends AppCompatActivity {
                         Snackbar.LENGTH_LONG).show();
             } else {
                 shelter.changeCapacity(numBeds, true);
+                FirebaseDB database = new FirebaseDB();
+                database.changeShelterCapacity(shelter.getKey(), shelter.getCapacityInt());
                 user.makeReservation(shelter.getKey(), numBeds);
 
                 finish();
@@ -77,6 +79,8 @@ public class ShelterCheckInActivity extends AppCompatActivity {
                     Snackbar.LENGTH_LONG).show();
         } else {
             shelter.changeCapacity(user.getResBeds(), false);
+            FirebaseDB database = new FirebaseDB();
+            database.changeShelterCapacity(shelter.getKey(), shelter.getCapacityInt());
             user.cancelReservation();
             finish();
         }
