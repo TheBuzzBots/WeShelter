@@ -6,20 +6,20 @@ package edu.gatech.team10.weshelter;
 
 public interface DBInterface {
 
-    public void readShelters();
+    void readShelters();
 
-    public void readHomelessPerson();
+    void readHomelessPerson();
 
-    public void readAdmin();
+    void readAdmin();
 
-    public void changeShelterCapacity(int key, int capacity);
+    void changeShelterCapacity(int key, int capacity);
 
-    public void writeNewHomelessPerson(User newUser);
+    void writeNewHomelessPerson(User newUser);
 
-    public void HomelessPersonCheckIn(String username, int resKey, int resBeds,
-                                     boolean reservation);
+    void HomelessPersonCheckIn(String username, int resKey, int resBeds,
+                               boolean reservation);
 
-    public void writeNewAdmin(User newUser);
+    void writeNewAdmin(User newUser);
 
 
 }
