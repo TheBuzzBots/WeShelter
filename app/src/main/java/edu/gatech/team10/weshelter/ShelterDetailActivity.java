@@ -19,7 +19,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null){
@@ -27,7 +27,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,26 +39,26 @@ public class ShelterDetailActivity extends AppCompatActivity {
             }
         });
 
-        TextView shelterName = (TextView) findViewById(R.id.textView_shelter_detail_name);
+        TextView shelterName = findViewById(R.id.textView_shelter_detail_name);
         shelterName.setText(model.getActiveShelter().getName());
-        TextView restrictions = (TextView) findViewById(R.id.textView_shelter_detail_restrictions);
+        TextView restrictions = findViewById(R.id.textView_shelter_detail_restrictions);
         restrictions.setText(model.getActiveShelter().getRestriction());
-        TextView capacity = (TextView) findViewById(R.id.textView_shelter_detail_capacity);
+        TextView capacity = findViewById(R.id.textView_shelter_detail_capacity);
         capacity.setText(model.getActiveShelter().getCapacity());
-        TextView vacancy = (TextView) findViewById(R.id.textView_shelter_detail_vacancy);
+        TextView vacancy = findViewById(R.id.textView_shelter_detail_vacancy);
         vacancy.setText(Integer.toString(model.getActiveShelter().getCapacityInt()));
-        TextView address = (TextView) findViewById(R.id.textView_shelter_detail_address);
+        TextView address = findViewById(R.id.textView_shelter_detail_address);
         address.setText(model.getActiveShelter().getAddress());
-        TextView phone = (TextView) findViewById(R.id.textView_shelter_detail_phone);
+        TextView phone = findViewById(R.id.textView_shelter_detail_phone);
         phone.setText(model.getActiveShelter().getPhone());
-        TextView note = (TextView) findViewById(R.id.textView_shelter_detail_note);
+        TextView note = findViewById(R.id.textView_shelter_detail_note);
         note.setText(model.getActiveShelter().getSpecialNote());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        TextView vacancy = (TextView) findViewById(R.id.textView_shelter_detail_vacancy);
+        TextView vacancy = findViewById(R.id.textView_shelter_detail_vacancy);
         vacancy.setText(Integer.toString(model.getActiveShelter().getCapacityInt()));
     }
 
