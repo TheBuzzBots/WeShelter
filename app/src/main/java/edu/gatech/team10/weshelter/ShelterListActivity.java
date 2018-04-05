@@ -207,6 +207,7 @@ public class ShelterListActivity extends AppCompatActivity {
                 @SuppressWarnings("unchecked")
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                    //noinspection unchecked
                     mDatasetFiltered = (ArrayList<Shelter>) filterResults.values;
                     model.setFilteredShelters(mDatasetFiltered);
                     mAdapter.notifyDataSetChanged();
