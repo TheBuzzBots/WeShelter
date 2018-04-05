@@ -230,11 +230,7 @@ public class Shelter {
     public boolean isValidBeds(int beds) {
         if (beds <= 0) {
             return false;
-        } else if (beds > capacity_int) {
-            return false;
-        } else {
-            return true;
-        }
+        } else return beds <= capacity_int;
     }
 
     @Override
