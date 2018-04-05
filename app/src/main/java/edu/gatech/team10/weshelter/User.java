@@ -12,7 +12,7 @@ public abstract class User {
     private String username;
     private String password;
     private String type;
-    static List<String> legalTypes = Arrays.asList("User", "Admin");
+    static final List<String> legalTypes = Arrays.asList("User", "Admin");
 
     /**
      * Constructs a default User.

@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 public class ShelterDetailActivity extends AppCompatActivity {
 
-    private Model model = Model.getInstance();
-    private User user = model.getActiveUser();
+    private final Model model = Model.getInstance();
+    private final User user = model.getActiveUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

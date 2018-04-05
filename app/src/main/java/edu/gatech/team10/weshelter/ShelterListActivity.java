@@ -105,10 +105,10 @@ public class ShelterListActivity extends AppCompatActivity {
 
         // ViewHolder set up
         public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mNameView;
-            public final TextView mRestrictions;
-            public Shelter mShelter;
+            final View mView;
+            final TextView mNameView;
+            final TextView mRestrictions;
+            Shelter mShelter;
 
             /**
              * Constructs a ViewHolder template for Shelter data.
@@ -204,6 +204,7 @@ public class ShelterListActivity extends AppCompatActivity {
                     return filterResults;
                 }
 
+                @SuppressWarnings("unchecked")
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                     mDatasetFiltered = (ArrayList<Shelter>) filterResults.values;
