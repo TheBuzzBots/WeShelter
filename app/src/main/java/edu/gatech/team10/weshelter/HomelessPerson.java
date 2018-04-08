@@ -90,7 +90,7 @@ public class HomelessPerson extends User {
         this.resBeds = beds;
         this.resKey = key;
         this.reservation = true;
-        database.HomelessPersonCheckIn(getUsername(), resKey, resBeds, reservation);
+        database.HomelessPersonCheckIn(getUsername(), resBeds, resKey, reservation);
     }
 
     /**
@@ -103,7 +103,7 @@ public class HomelessPerson extends User {
         this.reservation = false;
         this.resBeds = 0;
         this.resKey = 0;
-        database.HomelessPersonCheckIn(getUsername(), resKey, resBeds, reservation);
+        database.HomelessPersonCheckIn(getUsername(), resBeds, resKey, reservation);
     }
 
     /**
