@@ -13,7 +13,7 @@ public class ShelterIsValidBedsTests {
     private Shelter shelter;
 
     /**
-     * Sets up a shelter with initial capacity of 10.
+     * Sets up a shelter with initial capacity_int of 10.
      */
     @Before
     public void setUp() {
