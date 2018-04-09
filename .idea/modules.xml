@@ -3,10 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WeShelter.iml" filepath="$PROJECT_DIR$/WeShelter.iml" />
-      <module fileurl="file://C:/Users/Mohak Chadha/Desktop/CS 2340/M8/WeShelter/WeShelter.iml" filepath="C:/Users/Mohak Chadha/Desktop/CS 2340/M8/WeShelter/WeShelter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WeShelter.iml" filepath="$PROJECT_DIR$/WeShelter.iml" />
-      <module fileurl="file://C:/Users/Adrianna Brown/cs2340/WeShelter/.idea/WeShelter.iml" filepath="C:/Users/Adrianna Brown/cs2340/WeShelter/.idea/WeShelter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Mohak Chadha\Desktop\CS 2340\M8\WeShelter\WeShelter.iml" filepath="C:\Users\Mohak Chadha\Desktop\CS 2340\M8\WeShelter\WeShelter.iml" />
+      <module fileurl="file://C:\Users\Adrianna Brown\cs2340\WeShelter\.idea\WeShelter.iml" filepath="C:\Users\Adrianna Brown\cs2340\WeShelter\.idea\WeShelter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

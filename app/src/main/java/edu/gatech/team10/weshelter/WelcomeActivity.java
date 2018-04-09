@@ -9,7 +9,7 @@ import android.view.View;
 public class WelcomeActivity extends AppCompatActivity {
 
     final private Model model = Model.getInstance();
-    private DBInterface database = model.getDatabase();
+    private FirebaseDB database = new FirebaseDB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
