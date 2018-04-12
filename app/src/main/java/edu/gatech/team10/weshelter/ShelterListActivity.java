@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,10 +43,12 @@ public class ShelterListActivity extends AppCompatActivity {
         fabMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will redirect to map view", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Context context = view.getContext();
+                Intent intent = new Intent(context, MapsActivity.class);
+                startActivity(intent);
             }
         });
+
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.shelter_list);
@@ -65,13 +65,9 @@ public class ShelterListActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_shelter_list, menu);
 
         // Associate searchable configuration with the SearchView
-        Log.d("boog", "1");
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        Log.d("boog", "2");
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        Log.d("boog", "3");
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        Log.d("boog", "4");
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // listening to search query text change
@@ -102,19 +98,22 @@ public class ShelterListActivity extends AppCompatActivity {
         return true;
     }
 
+    // RecyclerView set up
     public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHolder> implements Filterable {
         private List<Shelter> mDataset;
         private List<Shelter> mDatasetFiltered;
 
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder
+        // ViewHolder set up
         public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mNameView;
-            public final TextView mRestrictions;
-            public Shelter mShelter;
+            final View mView;
+            final TextView mNameView;
+            final TextView mRestrictions;
+            Shelter mShelter;
 
+            /**
+             * Constructs a ViewHolder template for Shelter data.
+             * @param view current view
+             */
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
@@ -128,7 +127,10 @@ public class ShelterListActivity extends AppCompatActivity {
             }
         }
 
-        // Provide a suitable constructor (depends on the kind of dataset)
+        /**
+         * Converts data for usage in RecyclerView
+         * @param myDataset raw data list
+         */
         public ShelterAdapter(List<Shelter> myDataset) {
             mDataset = myDataset;
             mDatasetFiltered = myDataset;
@@ -148,7 +150,7 @@ public class ShelterListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mShelter = mDatasetFiltered.get(position);
             holder.mNameView.setText(mDatasetFiltered.get(position).getName());
-            holder.mRestrictions.setText(mDatasetFiltered.get(position).getRestrictions());
+            holder.mRestrictions.setText(mDatasetFiltered.get(position).getRestriction());
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -181,13 +183,14 @@ public class ShelterListActivity extends AppCompatActivity {
                         charString = convertSearch(charString);
                         for (Shelter s : mDataset) {
                             if (charString.toLowerCase().equals("men")
-                                    && s.getRestrictions().toLowerCase().contains("men")) {
-                                if (!s.getRestrictions().toLowerCase().contains("omen")) {
+                                    && s.getRestriction().toLowerCase().contains("men")) {
+                                if (!s.getRestriction().toLowerCase().contains("omen")) {
                                     filteredList.add(s);
                                 }
                             } else {
                                 if (s.getName().toLowerCase().contains(charString.toLowerCase())
-                                        || s.getRestrictions().toLowerCase().contains(charString.toLowerCase())) {
+                                        || s.getRestriction().toLowerCase()
+                                            .contains(charString.toLowerCase())) {
                                     filteredList.add(s);
                                 }
                             }
@@ -201,15 +204,24 @@ public class ShelterListActivity extends AppCompatActivity {
                     return filterResults;
                 }
 
+                @SuppressWarnings("unchecked")
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                    //noinspection unchecked
                     mDatasetFiltered = (ArrayList<Shelter>) filterResults.values;
+                    model.setFilteredShelters(mDatasetFiltered);
                     mAdapter.notifyDataSetChanged();
                 }
             };
         }
     }
 
+    /**
+     * Enables "fuzzy" searching by converting allowed synonyms into searchable terms
+     *
+     * @param keyword unconverted search input
+     * @return String approved search term or unchanged keyword
+     */
     public String convertSearch(String keyword) {
         if (keyword.equals("male")
                 || keyword.equals("man")

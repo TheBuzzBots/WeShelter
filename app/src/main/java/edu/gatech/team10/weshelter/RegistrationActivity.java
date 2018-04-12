@@ -2,7 +2,6 @@ package edu.gatech.team10.weshelter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +16,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText usernameField;
     private EditText passwordField;
     private Spinner typeSpinner;
+
+    final private Model model = Model.getInstance();
+    private DBInterface database = model.getDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,18 @@ public class RegistrationActivity extends AppCompatActivity {
         typeSpinner.setSelection(0);
     }
 
+    /**
+     * Cancels the registration attempt and returns to Welcome screen.
+     * @param v current view
+     */
     public void cancelRegistration(View v) {
         finish();
     }
 
+    /**
+     * Validates the registration attempt.
+     * @param v current view
+     */
     public void validateRegistration(View v) {
         String name = nameField.getText().toString();
         String username = usernameField.getText().toString();
@@ -56,10 +66,12 @@ public class RegistrationActivity extends AppCompatActivity {
             User newUser;
             if (type.equals("User")) {
                 newUser = new HomelessPerson(username, password, name);
+                database.writeNewHomelessPerson(newUser);
             } else {
                 newUser = new Admin(username, password, name);
+                database.writeNewAdmin(newUser);
             }
-            Model.getInstance().getUsers().put(usernameField.getText().toString(), newUser);
+            model.addUser(usernameField.getText().toString(), newUser);
             startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
         }
     }
