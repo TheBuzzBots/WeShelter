@@ -36,7 +36,6 @@ public class Model extends AppCompatActivity{
         _users = new HashMap<>();
         _shelters = new ArrayList<>();
         _filteredShelters = new ArrayList<>();
-        _database = new FirebaseDB();
     }
 
     /**
