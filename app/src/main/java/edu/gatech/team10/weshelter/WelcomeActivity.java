@@ -9,12 +9,14 @@ import android.view.View;
 public class WelcomeActivity extends AppCompatActivity {
 
     final private Model model = Model.getInstance();
-    private FirebaseDB database = new FirebaseDB();
+    private DBInterface database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (!(model.getHasLoadedData())) {
             model.setHasLoadedData(true);
+            model.setDatabase(new FirebaseDB());
+            database = model.getDatabase();
             database.readShelters();
             database.readHomelessPerson();
             database.readAdmin();
