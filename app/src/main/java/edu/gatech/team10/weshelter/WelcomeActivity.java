@@ -41,4 +41,12 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(new Intent(WelcomeActivity.this, RegistrationActivity.class));
     }
 
+    /**
+     * On text click, goes straight to Shelter list
+     * @param v current view
+     */
+    public void guestLoginFromWelcome(View v) {
+        model.setActiveUser(new Guest());
+        startActivity(new Intent(WelcomeActivity.this, ShelterListActivity.class));
+    }
 }

@@ -96,9 +96,7 @@ public abstract class User {
      * @param type type of user
      */
     void setType(String type) {
-        if (legalTypes.contains(type)) {
-            this.type = type;
-        }
+        this.type = type;
     }
 
     /**

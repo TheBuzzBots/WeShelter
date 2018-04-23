@@ -34,7 +34,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                 if (user.canCheckIn()) {
                     startActivity(new Intent(ShelterDetailActivity.this, ShelterCheckInActivity.class));
                 } else {
-                    Snackbar.make(view, "Admin cannot check-in.", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Admin/Guest cannot check-in.", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
