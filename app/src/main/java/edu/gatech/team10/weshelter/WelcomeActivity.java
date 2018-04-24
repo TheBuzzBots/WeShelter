@@ -13,14 +13,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (!(model.getHasLoadedData())) {
-            model.setHasLoadedData(true);
-            model.setDatabase(new FirebaseDB());
-            database = model.getDatabase();
-            database.readShelters();
-            database.readHomelessPerson();
-            database.readAdmin();
-        }
+        model.setDatabase(new FirebaseDB());
+        database = model.getDatabase();
+        database.readShelters();
+        database.readHomelessPerson();
+        database.readAdmin();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
     }

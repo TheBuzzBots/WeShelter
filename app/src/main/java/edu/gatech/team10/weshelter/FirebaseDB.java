@@ -17,12 +17,14 @@ public class FirebaseDB implements DBInterface {
     private DatabaseReference shelterRef = FirebaseDatabase.getInstance().getReference("Shelter");
     private DatabaseReference homelessRef = FirebaseDatabase.getInstance().getReference("User/HomelessPerson");
     private DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference("User/Admin");
+    private boolean afterFirst;
     final private Model model = Model.getInstance();
 
     public void readShelters() {
         shelterRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
                 for (DataSnapshot shelterSnapshot : dataSnapshot.getChildren()) {
 
                     Shelter shelter = new Shelter();
@@ -37,8 +39,15 @@ public class FirebaseDB implements DBInterface {
                     shelter.setSpecialNote(shelterSnapshot.child("Special Notes").getValue(String.class));
                     shelter.setKey(Integer.parseInt((String) shelterSnapshot.child("Unique Key").getValue()));
                     shelter.setCapacityInt(Integer.parseInt((String) shelterSnapshot.child("Int Capacity").getValue()));
-                    model.addShelter(shelter);
+                    if (!afterFirst) {
+                        model.addShelter(shelter);
+                    } else {
+                        model.getShelters().set(i, shelter);
+                    }
+                    i++;
                 }
+
+                afterFirst = true;
             }
 
             @Override
